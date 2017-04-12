@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Request access token
     // This request requires consumer key, consumer secret and request token
-    let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com"), consumerKey: "JRbs0s1WwEWaVFJ7XpRMPl8qZ", consumerSecret: "vZY107l3VE3Eple5tBnG8pfWsRZZWcME5slxEvf3bJgOQvta9y")
+    let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com"), consumerKey: "XXXXXXXXXX", consumerSecret: "XXXXXXXXXX")
     let requestToken = BDBOAuth1Credential(queryString: url.query)
     
     // Receiving an access token will allow this app to make requests to twitter on the behalf of the user
@@ -57,12 +57,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       twitterClient?.get("https://api.twitter.com/1.1/account/verify_credentials.json", parameters: nil, progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
-        let user = response as! NSDictionary
-        print("Twitter user, '\(user["name"]!)', account information received!")
-      }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error occured retrieving user Twitter acount information, \(error)")
+        let user = User(dictionary: response as! NSDictionary)
+        
+        
+        print("Twitter user, '\(user.name!)', account information received!")
+      }, failure: { (task: URLSessionDataTask?, error: Error?) in
+        print("Error occured retrieving user Twitter acount nformation, \(error)")
       })
       
+      // User tweets
+      twitterClient?.get("https://api.twitter.com/1.1/statuses/home_timeline.json", parameters: nil, progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        let tweetsAsDicts = response as! [NSDictionary]
+        
+        // Take the array of dicts and convert it to a array of Tweet objects.
+        // Because tweetsWithArray is class method, I can use the method without an istance.
+        let tweetsAsArray = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)
+        
+        for tweet in tweetsAsArray {
+          print(tweet.text!)
+        }
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error occurred while retrieving tweets, \(error)")
+      })
       
     }, failure: { (error: Error?) in
       print("Error getting access token, \(error)")

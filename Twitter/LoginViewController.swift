@@ -22,12 +22,11 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
- 
-
+  // Log user in using Twitter Oauth
   @IBAction func onLogin(_ sender: Any) {
     
     // Initiate Oauth by providing app info
-    let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com"), consumerKey: "JRbs0s1WwEWaVFJ7XpRMPl8qZ", consumerSecret: "vZY107l3VE3Eple5tBnG8pfWsRZZWcME5slxEvf3bJgOQvta9y")
+    let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com"), consumerKey: "XXXXXXXXXX", consumerSecret: "XXXXXXXXXX")
     
     twitterClient?.deauthorize()
     // in this method, the callback is the callback 'twitterdemo:' a type of web-like application protocol?
