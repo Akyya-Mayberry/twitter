@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "XXXXXXXXXX", consumerSecret: "XXXXXXXXXX")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "SWqj9evJlKLVDDALJPdX6P6kh", consumerSecret: "RHkmnLpciRYek0lwT0UjfqcOs88v0w48puCLG5ysuAl5nnbFGh")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
