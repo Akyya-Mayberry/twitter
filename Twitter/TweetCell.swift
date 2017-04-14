@@ -7,15 +7,37 @@
 //
 
 import UIKit
+import AFNetworking
 
 class TweetCell: UITableViewCell {
-  
+  @IBOutlet weak var timeLapseLabel: UILabel!
   @IBOutlet weak var tweetText: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var handleLabel: UILabel!
+  @IBOutlet weak var userImageView: UIImageView!
   
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
+      nameLabel.text = tweet?.user?["name"] as! String?
+      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String?)"
+      
+      let imagePath = tweet?.user?["profile_image_url_https"] as? String
+      
+      if imagePath != nil {
+        let imageURL = URL(string: imagePath!)
+        userImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+      } else {
+        userImageView.image = #imageLiteral(resourceName: "twitterLogo")
+      }
+      
+      // Time lapse/date for Tweet Post
+      let formatter = DateFormatter()
+      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+      let timestamp = tweet?.timestamp
+      let now = Date()
+      let timePassed = now.timeIntervalSince(timestamp!)
     }
   }
   

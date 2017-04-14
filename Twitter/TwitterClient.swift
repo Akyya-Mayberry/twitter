@@ -115,4 +115,19 @@ class TwitterClient: BDBOAuth1SessionManager {
           failure(error)
     })
   }
+  
+  //  func send(tweet: String) {
+  // Attempt to send tweet
+  //    let data = tweet.data(using: String.Encoding.utf8)
+  //    post("https://api.twitter.com/1.1/statuses/update.json?", parameters: nil, constructingBodyWith: { (block: AFMultipartFormData) in
+  //      block.appendPart(withForm: data!, name: "status")
+  //    }, progress: { (void) in
+  //      print("Progress...")
+  //    }, success: { (task: URLSessionDataTask, response: Any?) in
+  //       print("####### Tweet sent")
+  //    }) { (task: URLSessionDataTask?, error: Error) in
+  //      print("Error occured posting tweet: \(error)")
+  //    }
+  //  }
+  
 }
