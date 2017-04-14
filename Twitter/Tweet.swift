@@ -13,7 +13,7 @@ class Tweet: NSObject {
   var timestamp: Date?
   var retweetCount: Int = 0
   var favoritesCount: Int = 0
-
+  
   init(dictionary: NSDictionary){
     text = dictionary["text"] as? String
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
@@ -27,8 +27,9 @@ class Tweet: NSObject {
     }
   }
   
-  // Generates and returns list of tweets as array of tweet object instead of dictionaries
+  // Generates and returns list of tweets as array of tweet objects instead of dictionaries.
   // Because it is a class function, it can be used without an instance of a Tweet.
+  // Ex. Tweet.tweetsWithArray(dictionaries: someDict)
   class func tweetsWithArray(dictionaries: [NSDictionary]) -> [Tweet] {
     var tweets = [Tweet]()
     
