@@ -46,7 +46,7 @@ class TweetViewController: UIViewController {
     TwitterClient.sharedInstance?.send(tweet: composeTextView.text!, success: { (response: Bool) in
       self.dismiss(animated: true)
     }, failure: { (error: Error) in
-      print("########## HERE IS ERROR, \(error)")
+      print("HERE IS ERROR, \(error)")
     })
   }
   

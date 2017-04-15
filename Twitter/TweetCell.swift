@@ -15,13 +15,14 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var handleLabel: UILabel!
   @IBOutlet weak var userImageView: UIImageView!
+  @IBOutlet weak var favButton: UIButton!
   
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
-      nameLabel.text = tweet?.user?["name"] as! String?
-      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String?)"
+      nameLabel.text = tweet?.user?["name"] as? String
+      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
       
       let imagePath = tweet?.user?["profile_image_url_https"] as? String
       
@@ -30,6 +31,12 @@ class TweetCell: UITableViewCell {
         userImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
       } else {
         userImageView.image = #imageLiteral(resourceName: "twitterLogo")
+      }
+      
+      if (tweet?.favorited)! as Bool {
+        favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
+      } else {
+        favButton.imageView?.image = #imageLiteral(resourceName: "unfav")
       }
       
       // Time lapse/date for Tweet Post

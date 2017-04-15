@@ -25,6 +25,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // Retrieve user's twitter feed
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
       self.tweets = tweets
+      
+      for tweet in tweets {
+        print("&&&&&&&&&&&&& Tweet fav status, \(tweet.favorited)")
+      }
+      
+      
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
@@ -61,6 +67,50 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     })
   }
   
+  @IBAction func toggleFav(_ sender: Any) {
+    // Reverses the state of a favorited value of a tweet.
+    // Updates the tweet object and button to reflect the change.
+    
+    let sender = sender as! UIButton
+    let cell = sender.superview?.superview as! UITableViewCell
+    let indexPath = tableView.indexPath(for: cell)
+    let tweet = tweets?[(indexPath?.row)!]
+    let favorited = tweet?.favorited!
+    let id = tweet?.id!
+    
+    
+    if favorited! {
+      // Unfavorite the tweet
+      
+      TwitterClient.sharedInstance?.post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        let response = response as! NSDictionary
+        tweet?.favorited = response["favorited"] as? Bool
+        
+        sender.setImage(#imageLiteral(resourceName: "unfav"), for: .normal)
+        
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+      })
+    } else {
+      // Favorite the tweet
+      
+      TwitterClient.sharedInstance?.post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        let response = response as! NSDictionary
+        tweet?.favorited = response["favorited"] as? Bool
+        
+        sender.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
+        
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error updating tweet: \(error)")
+      })
+    }
+  }
+  
   @IBAction func onLogout(_ sender: Any) {
     TwitterClient.sharedInstance?.logout()
   }
@@ -79,3 +129,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
 }
+
+// MARK: TODO:
+// Move toggle fade requests to TweetClient.

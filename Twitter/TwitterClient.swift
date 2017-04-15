@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -99,7 +99,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   
   func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
     // User twitter feed
-    get("https://api.twitter.com/1.1/statuses/home_timeline.json", parameters: nil,
+    get("https://api.twitter.com/1.1/statuses/home_timeline.json", parameters: ["count": 20],
         progress: { (nil) in
           print("Progress...")
     },
@@ -120,22 +120,43 @@ class TwitterClient: BDBOAuth1SessionManager {
   
   func send(tweet: String, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
     
-    
-    
-    
     post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
       print("Progress...")
     }, success: { (task: URLSessionDataTask, response: Any?) in
       print("Tweet sent")
       success(true)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
-      print("#### HERE IS THE SESSION TASK: \(task?.response)")
-      //      print("Error occured posting tweet: \(error)")
+      print("Error occured posting tweet: \(error)")
     })
+  }
+  
+  func updateFavoritedWith(id: Int, to favorited: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
     
-    
-    
-    
+    // Distinguish which endpoint to hit
+    if favorited {
+      post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        let response = response as! NSDictionary
+        let isFavorited = response["favorited"] as! Bool
+        success(isFavorited)
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error updating tweet: \(error)")
+        failure(error)
+      })
+    } else {
+      
+      // change it to true
+      post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        let isFavorited = response as! Bool
+        success(isFavorited)
+        //        self.tableView.reloadData()
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        failure(error)
+      })
+    }
   }
   
 }

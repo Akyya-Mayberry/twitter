@@ -9,16 +9,20 @@
 import UIKit
 
 class Tweet: NSObject {
+  var id: Int?
   var user: NSDictionary?
   var text: String?
   var timestamp: Date?
+  var favorited: Bool?
   var retweetCount: Int = 0
   var favoritesCount: Int = 0
   
   init(dictionary: NSDictionary){
+    id = dictionary["id"] as? Int
     user = dictionary["user"] as? NSDictionary
     text = dictionary["text"] as? String
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
+    favorited = dictionary["favorited"] as? Bool
     favoritesCount = (dictionary["favourites_count"] as? Int) ?? 0
     
     // If a date is retrieved in dict, parse it

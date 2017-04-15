@@ -311,7 +311,11 @@
                                                         <constraint firstAttribute="width" constant="20" id="4nx-w4-A8e"/>
                                                         <constraint firstAttribute="height" constant="20" id="KPZ-K4-fsa"/>
                                                     </constraints>
-                                                    <state key="normal" title="Reply" image="twitterLogo"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                                                    <state key="normal" title="Favorite" image="unfav"/>
+                                                    <connections>
+                                                        <action selector="toggleFav:" destination="DHD-ia-24w" eventType="touchUpInside" id="9jm-v8-sAy"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -341,6 +345,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favButton" destination="Ool-yY-Ni7" id="f18-hc-jWE"/>
                                             <outlet property="handleLabel" destination="wiv-hy-Q3o" id="2yK-hq-ZXJ"/>
                                             <outlet property="nameLabel" destination="2iS-E6-B0o" id="NVM-eF-hlI"/>
                                             <outlet property="tweetText" destination="QKB-d0-AxF" id="49i-3q-cH6"/>
@@ -641,9 +646,10 @@
     </scenes>
     <resources>
         <image name="twitterLogo" width="200" height="200"/>
+        <image name="unfav" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xzI-Ey-6qf"/>
-        <segue reference="64W-D3-dSU"/>
+        <segue reference="Vuy-V0-jXP"/>
     </inferredMetricsTieBreakers>
 </document>
