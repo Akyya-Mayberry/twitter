@@ -36,7 +36,7 @@ class TweetCell: UITableViewCell {
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
       } else {
-        favButton.imageView?.image = #imageLiteral(resourceName: "unfav")
+        favButton.setImage(#imageLiteral(resourceName: "unfav"), for: .normal)
       }
       
       // Time lapse/date for Tweet Post

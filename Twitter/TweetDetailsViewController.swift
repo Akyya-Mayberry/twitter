@@ -16,6 +16,9 @@ class TweetDetailsViewController: UIViewController {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var actionsStackView: UIStackView!
   @IBOutlet weak var tweeterImageView: UIImageView!
+  @IBOutlet weak var retweetsCountLabel: UILabel!
+  @IBOutlet weak var favoritesCountLabel: UILabel!
+
   
   public var tweet: Tweet?
   
@@ -25,7 +28,8 @@ class TweetDetailsViewController: UIViewController {
       tweetText!.sizeToFit()
       nameLabel.text = tweet?.user?["name"] as! String?
       handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
-      
+      retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
+      favoritesCountLabel.text = String(describing: (tweet?.favoritesCount)!)
       let imagePath = tweet?.user?["profile_image_url_https"] as? String
       
       if imagePath != nil {
@@ -35,12 +39,18 @@ class TweetDetailsViewController: UIViewController {
         tweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
       }
       
-      // Time lapse/date for Tweet Post
       let formatter = DateFormatter()
-      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-      let timestamp = tweet?.timestamp
-      let now = Date()
-      let timePassed = now.timeIntervalSince(timestamp!)
+      formatter.dateFormat = "HH:mm dd.MM.yy"
+      
+      dateLabel.text = formatter.string(from: (tweet?.timestamp!)!)
+//      dateLabel.text = String(describing: (tweet?.timestap)!)
+      
+      // Time lapse/date for Tweet Post
+//      let formatter = DateFormatter()
+//      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+//      let timestamp = tweet?.timestamp
+//      let now = Date()
+//      let timePassed = now.timeIntervalSince(timestamp!)
         // Do any additional setup after loading the view.
     }
 
@@ -50,6 +60,8 @@ class TweetDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+  @IBAction func toggleFav(_ sender: Any) {
+  }
 
     /*
     // MARK: - Navigation

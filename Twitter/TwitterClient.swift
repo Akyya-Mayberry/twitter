@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -133,27 +133,28 @@ class TwitterClient: BDBOAuth1SessionManager {
   func updateFavoritedWith(id: Int, to favorited: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
     
     // Distinguish which endpoint to hit
-    if favorited {
-      post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
+    if !favorited {
+      post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
+        
         let response = response as! NSDictionary
         let isFavorited = response["favorited"] as! Bool
         success(isFavorited)
+        
       }, failure: { (task: URLSessionDataTask?, error: Error) in
         print("Error updating tweet: \(error)")
         failure(error)
       })
-    } else {
       
-      // change it to true
-      post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
+    } else {
+      post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
-        let isFavorited = response as! Bool
+        let isFavorited = (response as! NSDictionary)["favorited"] as! Bool
         success(isFavorited)
-        //        self.tableView.reloadData()
       }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error updating tweet: \(error)")
         failure(error)
       })
     }

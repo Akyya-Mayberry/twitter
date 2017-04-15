@@ -77,38 +77,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     let tweet = tweets?[(indexPath?.row)!]
     let favorited = tweet?.favorited!
     let id = tweet?.id!
-    
-    
-    if favorited! {
-      // Unfavorite the tweet
-      
-      TwitterClient.sharedInstance?.post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
-        print("Progress...")
-      }, success: { (task: URLSessionDataTask, response: Any?) in
-        
-        let response = response as! NSDictionary
-        tweet?.favorited = response["favorited"] as? Bool
-        
-        sender.setImage(#imageLiteral(resourceName: "unfav"), for: .normal)
-        
-      }, failure: { (task: URLSessionDataTask?, error: Error) in
-      })
-    } else {
-      // Favorite the tweet
-      
-      TwitterClient.sharedInstance?.post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
-        print("Progress...")
-      }, success: { (task: URLSessionDataTask, response: Any?) in
-        
-        let response = response as! NSDictionary
-        tweet?.favorited = response["favorited"] as? Bool
-        
+
+    TwitterClient.sharedInstance?.updateFavoritedWith(id: id!, to: favorited!, success: { (response: Bool) in
+      tweet?.favorited = response
+      if response {
         sender.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
-        
-      }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error updating tweet: \(error)")
-      })
-    }
+      } else {
+        sender.setImage(#imageLiteral(resourceName: "unfav"), for: .normal)
+      }
+    }, failure: { (error: Error) in
+      print("Error updating favorited status: \(error.localizedDescription)")
+    })
   }
   
   @IBAction func onLogout(_ sender: Any) {
@@ -129,6 +108,3 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   }
   
 }
-
-// MARK: TODO:
-// Move toggle fade requests to TweetClient.
