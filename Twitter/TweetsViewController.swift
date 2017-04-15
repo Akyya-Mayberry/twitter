@@ -16,18 +16,24 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Set up table view
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.estimatedRowHeight = 330
+    tableView.estimatedRowHeight = 200
     tableView.rowHeight = UITableViewAutomaticDimension
     
+    // Retrieve user's twitter feed
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
       self.tweets = tweets
-      
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
     })
+    
+    // Setup refresh control
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(refreshTweetsControl(_:)), for: UIControlEvents.valueChanged)
+    tableView.insertSubview(refreshControl, at: 0)
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +47,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     cell.tweet = tweets?[indexPath.row]
     
     return cell
+  }
+  
+  // Refresh data
+  func refreshTweetsControl(_ refreshControl: UIRefreshControl) {
+    // Fetch data
+    TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
+      self.tweets = tweets
+      self.tableView.reloadData()
+      refreshControl.endRefreshing()
+    }, failure: { (error: Error) in
+      print("Error retrieving tweets: \(error)")
+    })
   }
   
   @IBAction func onLogout(_ sender: Any) {
