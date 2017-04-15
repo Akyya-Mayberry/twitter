@@ -43,31 +43,11 @@ class TweetViewController: UIViewController {
   }
   
   @IBAction func onTweet(_ sender: Any) {
-    //    TwitterClient.sharedInstance?.send(tweet: composeTextView.text!)
-
-    let data = composeTextView.text!.data(using: String.Encoding.utf8)
-    
-    // Attempt to send tweet
-    TwitterClient.sharedInstance?.post("https://api.twitter.com/1.1/statuses/update.json?", parameters: ["status": data], progress: { (nil) in
-      print("Progress...")
-    }, success: { (task: URLSessionDataTask, response: Any?) in
-      print("Tweet sent")
-    }, failure: { (task: URLSessionDataTask?, error: Error) in
-      print("Error occured posting tweet: \(error)")
+    TwitterClient.sharedInstance?.send(tweet: composeTextView.text!, success: { (response: Bool) in
+      self.dismiss(animated: true)
+    }, failure: { (error: Error) in
+      print("########## HERE IS ERROR, \(error)")
     })
-    
-    // Segue back to home
   }
-  
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
   
 }

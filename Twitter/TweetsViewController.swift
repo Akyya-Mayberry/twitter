@@ -47,6 +47,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     TwitterClient.sharedInstance?.logout()
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "detailsSegue" {
+      let detailsVC = segue.destination as! TweetDetailsViewController
+      let indexPath = tableView.indexPath(for: sender as! TweetCell)
+      detailsVC.tweet = tweets?[(indexPath?.row)!]
+    }
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.

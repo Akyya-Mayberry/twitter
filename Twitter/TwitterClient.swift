@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "SWqj9evJlKLVDDALJPdX6P6kh", consumerSecret: "RHkmnLpciRYek0lwT0UjfqcOs88v0w48puCLG5ysuAl5nnbFGh")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -116,18 +116,26 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-  //  func send(tweet: String) {
-  // Attempt to send tweet
-  //    let data = tweet.data(using: String.Encoding.utf8)
-  //    post("https://api.twitter.com/1.1/statuses/update.json?", parameters: nil, constructingBodyWith: { (block: AFMultipartFormData) in
-  //      block.appendPart(withForm: data!, name: "status")
-  //    }, progress: { (void) in
-  //      print("Progress...")
-  //    }, success: { (task: URLSessionDataTask, response: Any?) in
-  //       print("####### Tweet sent")
-  //    }) { (task: URLSessionDataTask?, error: Error) in
-  //      print("Error occured posting tweet: \(error)")
-  //    }
-  //  }
+  
+  
+  func send(tweet: String, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+    
+    
+    
+    
+    post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
+      print("Progress...")
+    }, success: { (task: URLSessionDataTask, response: Any?) in
+      print("Tweet sent")
+      success(true)
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+      print("#### HERE IS THE SESSION TASK: \(task?.response)")
+      //      print("Error occured posting tweet: \(error)")
+    })
+    
+    
+    
+    
+  }
   
 }

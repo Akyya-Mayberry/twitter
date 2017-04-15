@@ -15,6 +15,9 @@
 		AB2DA64A1E9DBBDB00D1079F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB2DA6481E9DBBDB00D1079F /* Main.storyboard */; };
 		AB2DA64C1E9DBBDB00D1079F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB2DA64B1E9DBBDB00D1079F /* Assets.xcassets */; };
 		AB2DA64F1E9DBBDB00D1079F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB2DA64D1E9DBBDB00D1079F /* LaunchScreen.storyboard */; };
+		AB5A849A1EA181ED00A02B00 /* ReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5A84991EA181ED00A02B00 /* ReplyViewController.swift */; };
+		AB5A849C1EA1859800A02B00 /* RetweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5A849B1EA1859800A02B00 /* RetweetViewController.swift */; };
+		AB5A849E1EA19E1800A02B00 /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5A849D1EA19E1800A02B00 /* TweetDetailsViewController.swift */; };
 		AB6CBEC71E9ECDD4006B6FAF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CBEC61E9ECDD4006B6FAF /* User.swift */; };
 		AB6CBEC91E9ECDEA006B6FAF /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CBEC81E9ECDEA006B6FAF /* Tweet.swift */; };
 		AB6CBECC1E9EEBF8006B6FAF /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6CBECB1E9EEBF8006B6FAF /* TwitterClient.swift */; };
@@ -33,6 +36,9 @@
 		AB2DA64B1E9DBBDB00D1079F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB2DA64E1E9DBBDB00D1079F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB2DA6501E9DBBDB00D1079F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB5A84991EA181ED00A02B00 /* ReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyViewController.swift; sourceTree = "<group>"; };
+		AB5A849B1EA1859800A02B00 /* RetweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetweetViewController.swift; sourceTree = "<group>"; };
+		AB5A849D1EA19E1800A02B00 /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
 		AB6CBEC61E9ECDD4006B6FAF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AB6CBEC81E9ECDEA006B6FAF /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		AB6CBECB1E9EEBF8006B6FAF /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
@@ -134,6 +140,9 @@
 				ABF1CED71E9DC3D300A1B3E1 /* LoginViewController.swift */,
 				AB2C26231E9FCB1A00283156 /* TweetsViewController.swift */,
 				AB2C262A1EA125B400283156 /* TweetViewController.swift */,
+				AB5A84991EA181ED00A02B00 /* ReplyViewController.swift */,
+				AB5A849B1EA1859800A02B00 /* RetweetViewController.swift */,
+				AB5A849D1EA19E1800A02B00 /* TweetDetailsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -262,13 +271,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB6CBECC1E9EEBF8006B6FAF /* TwitterClient.swift in Sources */,
+				AB5A849A1EA181ED00A02B00 /* ReplyViewController.swift in Sources */,
 				AB2C26291E9FCF4100283156 /* TweetCell.swift in Sources */,
 				ABF1CED81E9DC3D300A1B3E1 /* LoginViewController.swift in Sources */,
+				AB5A849E1EA19E1800A02B00 /* TweetDetailsViewController.swift in Sources */,
 				AB2C26241E9FCB1A00283156 /* TweetsViewController.swift in Sources */,
 				AB2C262B1EA125B400283156 /* TweetViewController.swift in Sources */,
 				AB2DA6451E9DBBDB00D1079F /* AppDelegate.swift in Sources */,
 				AB6CBEC71E9ECDD4006B6FAF /* User.swift in Sources */,
 				AB6CBEC91E9ECDEA006B6FAF /* Tweet.swift in Sources */,
+				AB5A849C1EA1859800A02B00 /* RetweetViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
