@@ -33,6 +33,10 @@ class TweetCell: UITableViewCell {
         userImageView.image = #imageLiteral(resourceName: "twitterLogo")
       }
       
+      userImageView.layer.cornerRadius = 10
+      userImageView.clipsToBounds = true
+      userImageView.layer.borderWidth = 3
+      
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
       } else {

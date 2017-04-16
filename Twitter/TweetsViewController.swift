@@ -25,12 +25,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // Retrieve user's twitter feed
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
       self.tweets = tweets
-      
-      for tweet in tweets {
-        print("&&&&&&&&&&&&& Tweet fav status, \(tweet.favorited)")
-      }
-      
-      
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
@@ -77,7 +71,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     let tweet = tweets?[(indexPath?.row)!]
     let favorited = tweet?.favorited!
     let id = tweet?.id!
-
+    
     TwitterClient.sharedInstance?.updateFavoritedWith(id: id!, to: favorited!, success: { (response: Bool) in
       tweet?.favorited = response
       if response {
@@ -98,8 +92,26 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     if segue.identifier == "detailsSegue" {
       let detailsVC = segue.destination as! TweetDetailsViewController
       let indexPath = tableView.indexPath(for: sender as! TweetCell)
+      
       detailsVC.tweet = tweets?[(indexPath?.row)!]
+      detailsVC.indexPath = indexPath
+      detailsVC.tweets = tweets
+      detailsVC.sender = sender as! TweetCell?
     }
+    
+    if segue.identifier == "replySegue" {
+      let navigationController = segue.destination as! UINavigationController
+      let replyVC = navigationController.topViewController as! ReplyViewController
+      
+      // Get the cell associated with the button that was clicked
+      let sender = sender as! UIButton
+      let cell = sender.superview?.superview as! UITableViewCell
+      let indexPath = tableView.indexPath(for: cell)
+      
+      replyVC.tweets = tweets
+      replyVC.tweet = tweets?[(indexPath?.row)!]
+    }
+    
   }
   
   override func didReceiveMemoryWarning() {

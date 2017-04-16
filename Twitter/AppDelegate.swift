@@ -35,6 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let vc = storyboard.instantiateInitialViewController()
       self.window?.rootViewController = vc
     }
+    
+    // Set up shared navigation bar settings
+    let navigationBarAppearace = UINavigationBar.appearance()
+    navigationBarAppearace.tintColor = UIColor.white // Text buttons
+    navigationBarAppearace.barTintColor = UIColor(red: 153/255, green: 206/255, blue: 255/255, alpha: 1) // Nav bar
+    navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]  // Title's text color etc.
+    
     return true
   }
   

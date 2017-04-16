@@ -10,11 +10,17 @@ import UIKit
 import BDBOAuth1Manager
 
 class LoginViewController: UIViewController {
+  @IBOutlet weak var logoImageView: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
+    
+    logoImageView.layer.cornerRadius = 10
+    logoImageView.clipsToBounds = true
+    logoImageView.layer.borderWidth = 3
+    logoImageView.layer.borderColor = UIColor.white.cgColor
   }
   
   override func didReceiveMemoryWarning() {
