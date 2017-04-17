@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "1q2fgiw4BDUYH87CqiibFSZaZ", consumerSecret: "kbnz5Yi1FKnMJP1t8ici5BlsMlDwmj8pHK2nzkqLyo2WXQImer")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -97,9 +97,16 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-  func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+  func homeTimeLine(tweetsBeforeID id: Int?, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
     // User twitter feed.
-    get("/1.1/statuses/home_timeline.json", parameters: ["count": 20],
+    
+    var parameters = ["count": 20]
+    
+    if id != nil {
+      parameters["max_id"] = id!
+    }
+    
+    get("/1.1/statuses/home_timeline.json", parameters: parameters,
         progress: { (nil) in
           print("Progress...")
     },
