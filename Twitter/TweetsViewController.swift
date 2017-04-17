@@ -25,7 +25,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // Retrieve user's twitter feed
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
       self.tweets = tweets
-      
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")

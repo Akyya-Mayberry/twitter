@@ -26,7 +26,6 @@ class TweetCell: UITableViewCell {
       tweetText!.sizeToFit()
       nameLabel.text = tweet?.user?["name"] as? String
       handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
-      
       let imagePath = tweet?.user?["profile_image_url_https"] as? String
       
       if imagePath != nil {
@@ -48,6 +47,9 @@ class TweetCell: UITableViewCell {
       
       if (tweet?.retweeted)! as Bool {
         retweetButton.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
+        
+        // show the retweeters info
+        
       } else {
         retweetButton.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
       }
@@ -55,7 +57,7 @@ class TweetCell: UITableViewCell {
       if tweet?.retweetedStatus != nil {
         retweeterImageView.isHidden = false
         retweeterNameLabel.isHidden = false
-        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String?) retweeted"
+        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String) retweeted"
       }
       
       // Time lapse/date for Tweet Post
