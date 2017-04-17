@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "1q2fgiw4BDUYH87CqiibFSZaZ", consumerSecret: "kbnz5Yi1FKnMJP1t8ici5BlsMlDwmj8pHK2nzkqLyo2WXQImer")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -27,12 +27,12 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     deauthorize()
     // In this method, the callback is the callback 'twitterdemo:' a type of web-like application protocol.
-    fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
+    fetchRequestToken(withPath: "/oauth/request_token", method: "GET", callbackURL: URL(string: "twitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
       
       // After getting a token, get authorization to request user to grant access.
       if requestToken != nil {
         if let token = requestToken!.token {
-          let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(token)")
+          let url = URL(string: "/oauth/authorize?oauth_token=\(token)")
           
           // Go to Twitter authorization url
           UIApplication.shared.open(url!, options: [:], completionHandler: { (success: Bool) in
@@ -65,7 +65,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     let requestToken = BDBOAuth1Credential(queryString: url.query)
     
     // Receiving an access token will allow this app to make requests to twitter on the behalf of the user
-    fetchAccessToken(withPath: "https://api.twitter.com/oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
+    fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) in
       
       self.userAccount(success: { (user: User) in
         User.currentUser = user
@@ -81,8 +81,8 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func userAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
-    // Access users account info
-    get("https://api.twitter.com/1.1/account/verify_credentials.json", parameters: nil, progress: { (nil) in
+    // Access users account info.
+    get("/1.1/account/verify_credentials.json", parameters: nil, progress: { (nil) in
       print("Progress...")
       
     }, success: { (task: URLSessionDataTask, response: Any?) in
@@ -98,18 +98,18 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
-    // User twitter feed
-    get("https://api.twitter.com/1.1/statuses/home_timeline.json", parameters: ["count": 20],
+    // User twitter feed.
+    get("/1.1/statuses/home_timeline.json", parameters: ["count": 20],
         progress: { (nil) in
           print("Progress...")
     },
         success: { (task: URLSessionDataTask, response: Any?) -> Void in
           let tweetsAsDicts = response as! [NSDictionary]
-          for tweet in tweetsAsDicts {
-            if let retweet_status = tweet["retweeted_status"] {
-              print("$$$$$$$$$$$$$$$$ HERE IS THE TWEET THAT IS A RETWEET, \(tweet)")
-            }
-          }
+//          for tweet in tweetsAsDicts {
+//            if let retweet_status = tweet["retweeted_status"] {
+//              print("$$$$$$$$$$$$$$$$ HERE IS THE TWEET THAT IS A RETWEET, \(tweet)")
+//            }
+//          }
           // Take the array of dicts and convert it to a array of Tweet objects.
           // Because tweetsWithArray is class method, I can use the method without an istance.
           let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)
@@ -121,8 +121,8 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func send(tweet: String, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
-    
-    post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
+    // Send original tweets.
+    post("/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
       print("Progress...")
     }, success: { (task: URLSessionDataTask, response: Any?) in
       print("Tweet sent")
@@ -133,8 +133,8 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func sendReplyTo(tweet id: Int, with reply: String,  success: @escaping (Any?) -> (), failure: @escaping (Error) -> ()) {
-    
-    post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
+    // Post reply to a tweet of given id
+    post("/1.1/statuses/update.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
       print("Progress...")
     }, success: { (task: URLSessionDataTask, response: Any?) in
       print("Retweet sent, response: \(response)")
@@ -145,35 +145,35 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func updateRetweetStatus(id: Int, to tweeted: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+    // Negates the current retweet status of a tweet.
+    // The json tweet info sent in the response, doesn't include the most
+    // current retweet status, so explicit status has to be returned upon success.
     
     // Distinguish which endpoint to hit
-    if !tweeted {
-      post("https://api.twitter.com/1.1/statuses/retweet/\(id).json", parameters: nil, progress: { (nil) in
+    if !(tweeted) {
+      post("/1.1/statuses/retweet/\(id).json", parameters: nil, progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
         
-        let response = response as! NSDictionary
-        let isRetweeted = response["retweeted"] as! Bool
         success(true)
-        print("RESPONSE FROM RETWEET, \(response)")
         
       }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error retweeting: \(error)")
+        
         failure(error)
+        
       })
       
     } else {
-      post("https://api.twitter.com/1.1/statuses/unretweet/\(id).json", parameters: nil, progress: { (nil) in
+      post("/1.1/statuses/unretweet/\(id).json", parameters: nil, progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
         
-        let response = response as! NSDictionary
-        let isRetweeted = response["retweeted"] as! Bool
         success(false)
-        print("RESPONSE FROM UNRETWEET, \(response)")
+        
       }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error retweeting: \(error)")
+        
         failure(error)
+        
       })
     }
     
@@ -181,30 +181,37 @@ class TwitterClient: BDBOAuth1SessionManager {
   }
   
   func updateFavoritedWith(id: Int, to favorited: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+    // Negates the current favorite status of a tweet.
+    // The json response includes the most current status.
+    // An explicit boolean can also be returned.
     
     // Distinguish which endpoint to hit
     if !favorited {
-      post("https://api.twitter.com/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
+      post("/1.1/favorites/create.json", parameters: ["id": id], progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
         
         let response = response as! NSDictionary
         let isFavorited = response["favorited"] as! Bool
+        
         success(isFavorited)
         
       }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error updating tweet: \(error)")
+
         failure(error)
+        
       })
       
     } else {
-      post("https://api.twitter.com/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
+      post("f/1.1/favorites/destroy.json", parameters: ["id": id], progress: { (nil) in
         print("Progress...")
       }, success: { (task: URLSessionDataTask, response: Any?) in
+       
         let isFavorited = (response as! NSDictionary)["favorited"] as! Bool
         success(isFavorited)
+        
       }, failure: { (task: URLSessionDataTask?, error: Error) in
-        print("Error updating tweet: \(error)")
+        
         failure(error)
       })
     }
