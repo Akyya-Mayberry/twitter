@@ -32,7 +32,7 @@ class TweetDetailsViewController: UIViewController {
     nameLabel.text = tweet?.user?["name"] as! String?
     handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
     retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
-    favoritesCountLabel.text = String(describing: (tweet?.favoritesCount)!)
+    favoritesCountLabel.text = String(describing: (tweet?.favouriteCount)!)
     let imagePath = tweet?.user?["profile_image_url_https"] as? String
     
     if imagePath != nil {

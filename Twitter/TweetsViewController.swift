@@ -25,6 +25,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // Retrieve user's twitter feed
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
       self.tweets = tweets
+      
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
@@ -71,14 +72,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     TwitterClient.sharedInstance?.updateRetweetStatus(id: id!, to: retweeted!, success: { (response: Bool) in
       tweet?.retweeted = response
-      print("#### Is retweeted?, response: \(response)")
+//      print("#### Is retweeted?, response: \(response)")
       if response {
         sender.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
       } else {
         sender.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
       }
     }, failure: { (error: Error) in
-      print("##### Issue retweeting, error: \(error)")
+//      print("##### Issue retweeting, error: \(error)")
     })
   }
   

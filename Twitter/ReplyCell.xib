@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="729" height="552"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwW-us-2YD">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwW-us-2YD">
                         <rect key="frame" x="80" y="4.5" width="188" height="23.5"/>
                         <attributedString key="attributedText">
                             <fragment content="memphis_kid retweeted">
@@ -75,7 +75,7 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="twitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-cF-Chy">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-cF-Chy">
                         <rect key="frame" x="54" y="8" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="0O9-Mq-75R"/>
@@ -134,8 +134,8 @@
                 <outlet property="composeText" destination="a6y-XH-Zsx" id="R2y-jQ-xFd"/>
                 <outlet property="handleLabel" destination="ng6-13-lho" id="vEI-1O-hoS"/>
                 <outlet property="nameLabel" destination="maR-fK-pRl" id="Bkn-Ja-s8l"/>
-                <outlet property="retweeterImageView" destination="AHC-cF-Chy" id="nF9-Cg-aMF"/>
-                <outlet property="retweeterNameLabel" destination="IwW-us-2YD" id="eY3-h0-VgX"/>
+                <outlet property="retweeterImageView" destination="AHC-cF-Chy" id="KQs-SQ-GSs"/>
+                <outlet property="retweeterNameLabel" destination="IwW-us-2YD" id="C3q-Ck-ax6"/>
                 <outlet property="tweetText" destination="Upk-oW-35v" id="T6h-1h-WBr"/>
                 <outlet property="tweeterImageView" destination="3A3-wF-vph" id="foE-d7-Kja"/>
             </connections>
@@ -143,6 +143,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="retweet" width="120" height="120"/>
         <image name="twitterLogo" width="200" height="200"/>
     </resources>
 </document>

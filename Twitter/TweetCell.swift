@@ -17,7 +17,9 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var favButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
-  
+  @IBOutlet weak var retweeterImageView: UIImageView!
+  @IBOutlet weak var retweeterNameLabel: UILabel!
+
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
@@ -48,6 +50,12 @@ class TweetCell: UITableViewCell {
         retweetButton.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
       } else {
         retweetButton.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
+      }
+      
+      if tweet?.retweetedStatus != nil {
+        retweeterImageView.isHidden = false
+        retweeterNameLabel.isHidden = false
+        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String?) retweeted"
       }
       
       // Time lapse/date for Tweet Post

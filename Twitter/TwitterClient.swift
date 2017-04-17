@@ -105,7 +105,11 @@ class TwitterClient: BDBOAuth1SessionManager {
     },
         success: { (task: URLSessionDataTask, response: Any?) -> Void in
           let tweetsAsDicts = response as! [NSDictionary]
-          
+          for tweet in tweetsAsDicts {
+            if let retweet_status = tweet["retweeted_status"] {
+              print("$$$$$$$$$$$$$$$$ HERE IS THE TWEET THAT IS A RETWEET, \(tweet)")
+            }
+          }
           // Take the array of dicts and convert it to a array of Tweet objects.
           // Because tweetsWithArray is class method, I can use the method without an istance.
           let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)

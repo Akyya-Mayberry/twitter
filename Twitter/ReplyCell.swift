@@ -12,9 +12,9 @@ import BDBOAuth1Manager
 
 class ReplyCell: UITableViewCell {
   @IBOutlet weak var retweeterImageView: UIImageView!
+  @IBOutlet weak var retweeterNameLabel: UILabel!
   @IBOutlet weak var tweeterImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var retweeterNameLabel: UILabel!
   @IBOutlet weak var handleLabel: UILabel!
   @IBOutlet weak var tweetText: UILabel!
   @IBOutlet weak var composeText: UITextView!
@@ -39,6 +39,12 @@ class ReplyCell: UITableViewCell {
       tweeterImageView.layer.cornerRadius = 10
       tweeterImageView.clipsToBounds = true
       tweeterImageView.layer.borderWidth = 3
+      
+      if tweet?.retweetedStatus != nil {
+        retweeterImageView.isHidden = false
+        retweeterNameLabel.isHidden = false
+        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String?) retweeted"
+      }
       
       // Time lapse/date for Tweet Post
       let formatter = DateFormatter()

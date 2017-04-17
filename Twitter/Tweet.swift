@@ -16,7 +16,10 @@ class Tweet: NSObject {
   var favorited: Bool?
   var retweeted: Bool?
   var retweetCount: Int = 0
-  var favoritesCount: Int = 0
+  var retweetedStatus: NSDictionary?
+  var retweetUser: NSDictionary?
+  var entities: NSDictionary?
+  var favouriteCount: Int = 0
   var in_reply_to_user_id: Int?
   
   init(dictionary: NSDictionary){
@@ -26,14 +29,16 @@ class Tweet: NSObject {
     retweeted = dictionary["retweeted"] as? Bool
     favorited = dictionary["favorited"] as? Bool
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
+    retweetedStatus = dictionary["retweeted_status"] as? NSDictionary
+    if retweetedStatus != nil {
+       retweetUser = retweetedStatus?["user"] as? NSDictionary
+    }
     in_reply_to_user_id = dictionary["in_reply_to_user_id"] as? Int
     
     
     // Not sure twitter includes favorites count anymore
     // Favourites_count is listed under the user key.
-    favoritesCount = self.user?["favorite_count"] as? Int ?? 0
-    
-    
+    favouriteCount = dictionary["favourite_count"] as? Int ?? 0
     
     // If a date is retrieved in dict, parse it
     if let timeStampString = dictionary["created_at"] {
