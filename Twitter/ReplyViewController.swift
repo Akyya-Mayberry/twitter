@@ -58,18 +58,18 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
   }
   
   @IBAction func onSend(_ sender: Any) {
-    let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
-    let tweet = tweets?[(indexPath?.row)!]
-    let cell = tableView.cellForRow(at: indexPath!) as! ReplyCell
-    let composeText = cell.composeText.text!
-    let id = tweet?.in_reply_to_user_id
-    
-    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Bool) in
-      print("Reply sent, response is: \(response)")
-      self.dismiss(animated: true)
-    }, failure: { (error: Error) in
-      print("Error posting reply: error: \(error)")
-    })
+//    let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+//    let tweet = tweets?[(indexPath?.row)!]
+//    let cell = tableView.cellForRow(at: indexPath!) as! ReplyCell
+//    let composeText = cell.composeText.text!
+//    let id = tweet?.in_reply_to_user_id
+//    
+//    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Bool) in
+//      print("Reply sent, response is: \(response)")
+//      self.dismiss(animated: true)
+//    }, failure: { (error: Error) in
+//      print("Error posting reply: error: \(error)")
+//    })
   }
   
   /*

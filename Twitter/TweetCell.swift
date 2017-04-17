@@ -16,6 +16,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var handleLabel: UILabel!
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var favButton: UIButton!
+  @IBOutlet weak var retweetButton: UIButton!
   
   var tweet: Tweet? {
     didSet {
@@ -41,6 +42,12 @@ class TweetCell: UITableViewCell {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
       } else {
         favButton.setImage(#imageLiteral(resourceName: "unfav"), for: .normal)
+      }
+      
+      if (tweet?.retweeted)! as Bool {
+        retweetButton.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
+      } else {
+        retweetButton.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
       }
       
       // Time lapse/date for Tweet Post

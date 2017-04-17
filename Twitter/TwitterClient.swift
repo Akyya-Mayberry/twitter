@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -116,8 +116,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-  
-  
   func send(tweet: String, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
     
     post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
@@ -140,6 +138,45 @@ class TwitterClient: BDBOAuth1SessionManager {
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("Error occured posting retweet: \(error)")
     })
+  }
+  
+  func updateRetweetStatus(id: Int, to tweeted: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+    
+    // Distinguish which endpoint to hit
+    if !tweeted {
+      post("https://api.twitter.com/1.1/statuses/retweet/\(id).json", parameters: nil, progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        //        let response = response as! NSDictionary
+        //        let isRetweeted = response["retweeted"] as! Bool
+        //        print("################# RESPONSE FROM RETWEET, I should be retweeted 1 \(response["retweeted"])")
+        
+        success(true)
+        
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error retweeting: \(error)")
+        failure(error)
+      })
+      
+    } else {
+      post("https://api.twitter.com/1.1/statuses/unretweet/\(id).json", parameters: nil, progress: { (nil) in
+        print("Progress...")
+      }, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        //        let response = response as! NSDictionary
+        //        let isRetweeted = response["retweeted"] as! Bool
+        //        print("################# RESPONSE FROM UNRETWEET, I should be untweeted 0 \(response["retweeted"])")
+        
+        success(false)
+        
+      }, failure: { (task: URLSessionDataTask?, error: Error) in
+        print("Error retweeting: \(error)")
+        failure(error)
+      })
+    }
+    
+    
   }
   
   func updateFavoritedWith(id: Int, to favorited: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {

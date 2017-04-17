@@ -61,6 +61,27 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     })
   }
   
+  @IBAction func onRetweet(_ sender: Any) {
+    let sender = sender as! UIButton
+    let cell = sender.superview?.superview as! UITableViewCell
+    let indexPath = tableView.indexPath(for: cell)
+    let tweet = tweets?[(indexPath?.row)!]
+    let id = tweet?.id!
+    let retweeted = tweet?.retweeted!
+    
+    TwitterClient.sharedInstance?.updateRetweetStatus(id: id!, to: retweeted!, success: { (response: Bool) in
+      tweet?.retweeted = response
+      print("#### Is retweeted?, response: \(response)")
+      if response {
+        sender.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
+      } else {
+        sender.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
+      }
+    }, failure: { (error: Error) in
+      print("##### Issue retweeting, error: \(error)")
+    })
+  }
+  
   @IBAction func toggleFav(_ sender: Any) {
     // Reverses the state of a favorited value of a tweet.
     // Updates the tweet object and button to reflect the change.
