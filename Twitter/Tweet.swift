@@ -17,6 +17,7 @@ class Tweet: NSObject {
   var retweeted: Bool?
   var retweetCount: Int = 0
   var favoritesCount: Int = 0
+  var in_reply_to_user_id: Int?
   
   init(dictionary: NSDictionary){
     id = dictionary["id"] as? Int
@@ -25,6 +26,8 @@ class Tweet: NSObject {
     retweeted = dictionary["retweeted"] as? Bool
     favorited = dictionary["favorited"] as? Bool
     retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
+    in_reply_to_user_id = dictionary["in_reply_to_user_id"] as? Int
+    
     
     // Not sure twitter includes favorites count anymore
     // Favourites_count is listed under the user key.

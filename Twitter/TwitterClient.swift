@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -127,6 +127,18 @@ class TwitterClient: BDBOAuth1SessionManager {
       success(true)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("Error occured posting tweet: \(error)")
+    })
+  }
+  
+  func sendReplyTo(tweet id: Int, with reply: String,  success: @escaping (Any?) -> (), failure: @escaping (Error) -> ()) {
+    
+    post("https://api.twitter.com/1.1/statuses/retweet/:id.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
+      print("Progress...")
+    }, success: { (task: URLSessionDataTask, response: Any?) in
+      print("Retweet sent")
+      success(true)
+    }, failure: { (task: URLSessionDataTask?, error: Error) in
+      print("Error occured posting retweet: \(error)")
     })
   }
   

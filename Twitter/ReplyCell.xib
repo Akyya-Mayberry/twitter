@@ -11,23 +11,138 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="replyCell" rowHeight="192" id="KGk-i7-Jjw" customClass="ReplyCell" customModule="Twitter" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="338" height="192"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="replyCell" rowHeight="552" id="KGk-i7-Jjw" customClass="ReplyCell" customModule="Twitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="729" height="552"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="338" height="192"/>
+                <rect key="frame" x="0.0" y="0.0" width="729" height="552"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fav" translatesAutoresizingMaskIntoConstraints="NO" id="5gx-Vd-dWc">
-                        <rect key="frame" x="16" y="38" width="240" height="128"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwW-us-2YD">
+                        <rect key="frame" x="80" y="4.5" width="188" height="23.5"/>
+                        <attributedString key="attributedText">
+                            <fragment content="memphis_kid retweeted">
+                                <attributes>
+                                    <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="17" name="AvenirNext-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="3A3-wF-vph">
+                        <rect key="frame" x="8" y="33" width="66" height="66"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="66" id="REo-N6-iMR"/>
+                            <constraint firstAttribute="width" constant="66" id="e1e-gG-3E9"/>
+                        </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maR-fK-pRl">
+                        <rect key="frame" x="80" y="33" width="113" height="23.5"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Johnny Bravo">
+                                <attributes>
+                                    <font key="NSFont" size="17" name="AvenirNext-Bold"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Upk-oW-35v">
+                        <rect key="frame" x="80" y="58.5" width="287" height="84"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="287" id="5Sg-S3-3yo"/>
+                            <constraint firstAttribute="height" constant="84" id="Dl0-8G-0yP"/>
+                        </constraints>
+                        <attributedString key="attributedText">
+                            <fragment content="Tweet Text">
+                                <attributes>
+                                    <font key="NSFont" size="17" name="AvenirNext-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng6-13-lho">
+                        <rect key="frame" x="196" y="33" width="82" height="23.5"/>
+                        <attributedString key="attributedText">
+                            <fragment content="@jonnyboi">
+                                <attributes>
+                                    <color key="NSColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <font key="NSFont" size="17" name="AvenirNext-Regular"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="twitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-cF-Chy">
+                        <rect key="frame" x="54" y="8" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="0O9-Mq-75R"/>
+                            <constraint firstAttribute="height" constant="20" id="Mne-lF-lhH"/>
+                        </constraints>
+                    </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="a6y-XH-Zsx">
+                        <rect key="frame" x="8" y="150" width="406" height="130"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="406" id="Vnd-14-o2V"/>
+                            <constraint firstAttribute="height" constant="130" id="rIt-G1-Wgc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bkv-xy-mEF">
+                        <rect key="frame" x="346.5" y="295" width="36" height="32.5"/>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Send">
+                                    <attributes>
+                                        <color key="NSColor" red="0.63391359059999997" green="0.73754718959999999" blue="0.83798238260000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <font key="NSFont" size="15" name="AvenirNext-Regular"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="onSend:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="I7A-Qa-3ZF"/>
+                        </connections>
+                    </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="ng6-13-lho" firstAttribute="leading" secondItem="maR-fK-pRl" secondAttribute="trailing" constant="3" id="03C-Mq-oDn"/>
+                    <constraint firstItem="maR-fK-pRl" firstAttribute="leading" secondItem="3A3-wF-vph" secondAttribute="trailing" constant="6" id="247-wd-gr4"/>
+                    <constraint firstItem="Bkv-xy-mEF" firstAttribute="top" secondItem="a6y-XH-Zsx" secondAttribute="bottom" constant="15" id="4R5-uX-jBZ"/>
+                    <constraint firstItem="AHC-cF-Chy" firstAttribute="trailing" secondItem="3A3-wF-vph" secondAttribute="trailing" id="67Y-Sm-X0x"/>
+                    <constraint firstItem="3A3-wF-vph" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="994-GJ-53S"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Upk-oW-35v" secondAttribute="bottom" constant="5" id="DJE-H5-gkq"/>
+                    <constraint firstItem="a6y-XH-Zsx" firstAttribute="leading" secondItem="3A3-wF-vph" secondAttribute="leading" id="KoB-gx-FR4"/>
+                    <constraint firstItem="maR-fK-pRl" firstAttribute="top" secondItem="3A3-wF-vph" secondAttribute="top" id="Pdx-uo-HP8"/>
+                    <constraint firstItem="a6y-XH-Zsx" firstAttribute="top" secondItem="Upk-oW-35v" secondAttribute="bottom" constant="7.5" id="Rhg-ih-1hi"/>
+                    <constraint firstItem="ng6-13-lho" firstAttribute="baseline" secondItem="maR-fK-pRl" secondAttribute="baseline" id="VOb-71-mP4"/>
+                    <constraint firstItem="AHC-cF-Chy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="chX-dx-4nf"/>
+                    <constraint firstItem="IwW-us-2YD" firstAttribute="bottom" secondItem="AHC-cF-Chy" secondAttribute="bottom" id="ffo-LT-GX4"/>
+                    <constraint firstItem="maR-fK-pRl" firstAttribute="top" secondItem="IwW-us-2YD" secondAttribute="bottom" constant="5" id="fr5-8g-yzj"/>
+                    <constraint firstItem="Upk-oW-35v" firstAttribute="top" secondItem="ng6-13-lho" secondAttribute="bottom" constant="2" id="lSg-Pn-Xs6"/>
+                    <constraint firstItem="maR-fK-pRl" firstAttribute="leading" secondItem="IwW-us-2YD" secondAttribute="leading" id="plc-gD-QIt"/>
+                    <constraint firstItem="Upk-oW-35v" firstAttribute="leading" secondItem="IwW-us-2YD" secondAttribute="leading" id="sQ8-Gf-epz"/>
+                    <constraint firstItem="Bkv-xy-mEF" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="z7E-9z-DRS"/>
+                    <constraint firstItem="ng6-13-lho" firstAttribute="top" secondItem="IwW-us-2YD" secondAttribute="bottom" constant="5" id="zDc-sf-BbM"/>
+                </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="43" y="128"/>
+            <connections>
+                <outlet property="composeText" destination="a6y-XH-Zsx" id="R2y-jQ-xFd"/>
+                <outlet property="handleLabel" destination="ng6-13-lho" id="vEI-1O-hoS"/>
+                <outlet property="nameLabel" destination="maR-fK-pRl" id="Bkn-Ja-s8l"/>
+                <outlet property="retweeterImageView" destination="AHC-cF-Chy" id="nF9-Cg-aMF"/>
+                <outlet property="retweeterNameLabel" destination="IwW-us-2YD" id="eY3-h0-VgX"/>
+                <outlet property="tweetText" destination="Upk-oW-35v" id="T6h-1h-WBr"/>
+                <outlet property="tweeterImageView" destination="3A3-wF-vph" id="foE-d7-Kja"/>
+            </connections>
+            <point key="canvasLocation" x="17.5" y="189"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="fav" width="120" height="120"/>
+        <image name="twitterLogo" width="200" height="200"/>
     </resources>
 </document>

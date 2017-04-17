@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AFNetworking
+import BDBOAuth1Manager
 
 class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
@@ -20,7 +22,15 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.estimatedRowHeight = 100
+    
+    
     tableView.register(UINib(nibName: "ReplyCell", bundle: nil), forCellReuseIdentifier: "replyCell")
+    tableView.register(UINib(nibName: "CountCell", bundle: nil), forCellReuseIdentifier: "countCell")
+    tableView.register(UINib(nibName: "ReactionsCell", bundle: nil), forCellReuseIdentifier: "reactionsCell")
+    tableView.register(UINib(nibName: "ComposeCell", bundle: nil), forCellReuseIdentifier: "composeCell")
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -29,7 +39,7 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 4
+    return 1
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,9 +47,29 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "replyCell") as! ReplyCell
     
+    let cell = tableView.dequeueReusableCell(withIdentifier: "replyCell") as! ReplyCell
+    cell.tweet = tweet
     return cell
+  }
+  
+  @IBAction func onCancel(_ sender: Any) {
+    dismiss(animated: true)
+  }
+  
+  @IBAction func onSend(_ sender: Any) {
+    let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+    let tweet = tweets?[(indexPath?.row)!]
+    let cell = tableView.cellForRow(at: indexPath!) as! ReplyCell
+    let composeText = cell.composeText.text!
+    let id = tweet?.in_reply_to_user_id
+    
+    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Bool) in
+      print("Reply sent, response is: \(response)")
+      self.dismiss(animated: true)
+    }, failure: { (error: Error) in
+      print("Error posting reply: error: \(error)")
+    })
   }
   
   /*
