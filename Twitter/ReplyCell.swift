@@ -25,7 +25,7 @@ class ReplyCell: UITableViewCell {
       tweetText!.sizeToFit()
       composeText.sizeToFit()
       nameLabel.text = tweet?.user?["name"] as? String
-      handleLabel.text = "@ \(tweet?.user?["screen_name"] as? String)!"
+      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)!"
       
       let imagePath = tweet?.user?["profile_image_url_https"] as? String
       

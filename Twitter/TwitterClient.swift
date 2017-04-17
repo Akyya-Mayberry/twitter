@@ -16,7 +16,7 @@ class TwitterClient: BDBOAuth1SessionManager {
   // Because it is static no instance of TwitterClient is required
   // Ex. use - TwitterClient.sharedInstance.login()
   
-  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "", consumerSecret: "")
+  static let sharedInstance = TwitterClient(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "bpvqVnacAKkSDD7XRU52odIDw", consumerSecret: "1GdgxD8B2yoyRt8lJVcYv5VqFuyXMARGlbaFpZ3n4FaJGNPnVN")
   
   var loginSuccess: (() -> ())?
   var loginFailure: ((Error) -> ())?
@@ -130,27 +130,17 @@ class TwitterClient: BDBOAuth1SessionManager {
   
   func sendReplyTo(tweet id: Int, with reply: String,  success: @escaping (Any?) -> (), failure: @escaping (Error) -> ()) {
     
-    post("https://api.twitter.com/1.1/statuses/retweet/:id.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
+    post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
       print("Progress...")
     }, success: { (task: URLSessionDataTask, response: Any?) in
-      print("Retweet sent")
-      success(true)
+      print("Retweet sent, response: \(response)")
+      success(response)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
       print("Error occured posting retweet: \(error)")
     })
   }
   
   func updateRetweetStatus(id: Int, to tweeted: Bool, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
-    
-    //    post("https://api.twitter.com/1.1/statuses/retweet/\(id).json", parameters: nil, progress: { (nil) in
-    //      print("Progress...")
-    //    }, success: { (task: URLSessionDataTask, response: Any?) in
-    //      print("Retweet sent")
-    //      success(true)
-    //    }, failure: { (task: URLSessionDataTask?, error: Error) in
-    //      print("Error occured posting retweet: \(error)")
-    //    })
-    
     
     // Distinguish which endpoint to hit
     if !tweeted {
@@ -161,7 +151,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         let response = response as! NSDictionary
         let isRetweeted = response["retweeted"] as! Bool
         success(true)
-        print("################# RESPONSE FROM RETWEET, \(response)")
+        print("RESPONSE FROM RETWEET, \(response)")
         
       }, failure: { (task: URLSessionDataTask?, error: Error) in
         print("Error retweeting: \(error)")
@@ -176,7 +166,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         let response = response as! NSDictionary
         let isRetweeted = response["retweeted"] as! Bool
         success(false)
-        print("################# RESPONSE FROM UNRETWEET, \(response)")
+        print("RESPONSE FROM UNRETWEET, \(response)")
       }, failure: { (task: URLSessionDataTask?, error: Error) in
         print("Error retweeting: \(error)")
         failure(error)

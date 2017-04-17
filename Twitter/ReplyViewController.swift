@@ -25,12 +25,7 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 100
     
-    
     tableView.register(UINib(nibName: "ReplyCell", bundle: nil), forCellReuseIdentifier: "replyCell")
-    tableView.register(UINib(nibName: "CountCell", bundle: nil), forCellReuseIdentifier: "countCell")
-    tableView.register(UINib(nibName: "ReactionsCell", bundle: nil), forCellReuseIdentifier: "reactionsCell")
-    tableView.register(UINib(nibName: "ComposeCell", bundle: nil), forCellReuseIdentifier: "composeCell")
-    
   }
   
   override func didReceiveMemoryWarning() {
@@ -58,18 +53,20 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
   }
   
   @IBAction func onSend(_ sender: Any) {
-//    let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
-//    let tweet = tweets?[(indexPath?.row)!]
-//    let cell = tableView.cellForRow(at: indexPath!) as! ReplyCell
-//    let composeText = cell.composeText.text!
-//    let id = tweet?.in_reply_to_user_id
-//    
-//    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Bool) in
-//      print("Reply sent, response is: \(response)")
-//      self.dismiss(animated: true)
-//    }, failure: { (error: Error) in
-//      print("Error posting reply: error: \(error)")
-//    })
+    let indexPath = IndexPath(row: 0, section: 0)
+    let tweet = tweets?[(indexPath.row)]
+    let cell = tableView.cellForRow(at: indexPath) as! ReplyCell
+    let composeText = "@\(tweet?.user?["screen_name"] as! String) \(cell.composeText.text!)"
+    let id = tweet?.id
+    
+    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Any?) in
+      if response != nil {
+        print("Reply sent, response: \(response)")
+        self.dismiss(animated: true)
+      }
+    }, failure: { (error: Error) in
+      print("Error posting reply: error: \(error)")
+    })
   }
   
   /*
