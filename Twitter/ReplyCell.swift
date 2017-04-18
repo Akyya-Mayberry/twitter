@@ -85,10 +85,8 @@ class ReplyCell: UITableViewCell {
   }
   
   @IBAction func onSend(_ sender: Any) {
-    print("#########send button touch!")
     let id = tweet?.in_reply_to_user_id
-    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText.text, success: { (response: Any?) in
-      print("####Reply successfully sent, response: \(response)")
+    TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: "\(originalTweeterHandleLabel.text)\(composeText.text)", success: { (response: Any?) in
     }, failure: { (error: Error) in
       print("####Error sending reply: error: \(error)")
     })
