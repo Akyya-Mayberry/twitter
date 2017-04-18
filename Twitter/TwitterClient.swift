@@ -97,31 +97,6 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
-//  func homeTimeLine(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
-//    // User twitter feed
-//    get("https://api.twitter.com/1.1/statuses/home_timeline.json", parameters: ["count": 20],
-//        progress: { (nil) in
-//          print("Progress...")
-//    },
-//        success: { (task: URLSessionDataTask, response: Any?) -> Void in
-//          let tweetsAsDicts = response as! [NSDictionary]
-//          
-////          for tweet in tweetsAsDicts {
-////            if tweet["retweeted_status"] != nil {
-////              print("######## HERE IS A RETWEETED TWEET!, \(tweet)")
-////            }
-////          }
-//          
-//          // Take the array of dicts and convert it to a array of Tweet objects.
-//          // Because tweetsWithArray is class method, I can use the method without an istance.
-//          let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)
-//          success(tweets)
-//    },
-//        failure: { (task: URLSessionDataTask?, error: Error) -> Void in
-//          failure(error)
-//    })
-//  }
-
   func send(tweet: String, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
     
     post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": tweet], progress: { (nil) in
@@ -140,7 +115,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     var parameters = ["count": 20]
     
     if id != nil {
-      parameters["max_id"] = id!
+      parameters["max_id"] = id! - 1
     }
     
     get("/1.1/statuses/home_timeline.json", parameters: parameters,
@@ -154,6 +129,7 @@ class TwitterClient: BDBOAuth1SessionManager {
           //              print("$$$$$$$$$$$$$$$$ HERE IS THE TWEET THAT IS A RETWEET, \(tweet)")
           //            }
           //          }
+          
           // Take the array of dicts and convert it to a array of Tweet objects.
           // Because tweetsWithArray is class method, I can use the method without an istance.
           let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)

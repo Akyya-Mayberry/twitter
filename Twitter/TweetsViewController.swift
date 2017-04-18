@@ -14,6 +14,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   
   var tweets: [Tweet]?
   var isLoadingMoreData = false
+  var oldestTweetID: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,8 +26,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     tableView.rowHeight = UITableViewAutomaticDimension
     
     // Retrieve user's twitter feed
-    TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: nil, success: { (tweets: [Tweet]) in
+    TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: oldestTweetID, success: { (tweets: [Tweet]) in
       self.tweets = tweets
+      self.oldestTweetID = (self.tweets?.last)?.id
+//      print("Tweets view controller oldest tweet, \(self.oldestTweetID)")
+//      print("and here is the tweet text, \(self.tweets?.last?.text)")
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
@@ -56,50 +60,39 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // Fetch data
     TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: nil, success: { (tweets: [Tweet]) in
       self.tweets = tweets
+      self.oldestTweetID = (self.tweets?.last)?.id
       self.tableView.reloadData()
       refreshControl.endRefreshing()
     }, failure: { (error: Error) in
-      print("Error retrieving tweets: \(error)")
+      print("Error retrieving tweets: \(error.localizedDescription)")
     })
   }
   
   // Loads more data. If given id of last tweet,
   // it returns tweets before that tweet.
-  func loadMoreDataAfter(lastTweetID id: Int?) {
-    // track view did scroll.
-    // when its time to load more data
-    // get the id of the last item in tweets, and
-    // call client get method to retrieve tweets before it
+  func loadMoreData() {
     
-    TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: id, success: { (response: [Tweet]) in
-//      print("######## Last 10 tweets, \(response)")
-      self.isLoadingMoreData = false
+    TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: oldestTweetID, success: { (response: [Tweet]) in
       self.tweets?.append(contentsOf: response)
+      self.oldestTweetID = (self.tweets?.last)?.id
       self.tableView.reloadData()
+      self.isLoadingMoreData = false
     }, failure: { (error: Error) in
       print("Error occurred loading more data, error: \(error.localizedDescription)")
     })
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print("scoll occurred!")
-    
     if !(isLoadingMoreData) {
-      
       // Check whether more data should be fetch
       let scrollViewContentHeight = tableView.contentSize.height
       let scrollViewThreshold = scrollViewContentHeight - tableView.bounds.size.height // the length of table view shown
-      
-      // Threshold is met if top left corner of table view is further down in the , then the maxHeightToReach
       let scrollThreshold = tableView.contentOffset.y > scrollViewThreshold
       
       if scrollView.isDragging && scrollThreshold {
-        print("Load more data")
-        let lastTweet = tweets?.last
-        print("HERE IS THAT LAST TWEET ID, \(lastTweet?.id)")
-        loadMoreDataAfter(lastTweetID: (lastTweet)!.id)
+        isLoadingMoreData = true
+        loadMoreData()
       }
-      
     }
   }
   

@@ -21,14 +21,12 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var retweetImageView: UIImageView!
   @IBOutlet weak var dateLabel: UILabel!
-
+  
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
       originalTweeterHandleLabel.sizeToFit()
-      
-//      nameLabel.text = tweet?.user?["name"] as? String
       
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)

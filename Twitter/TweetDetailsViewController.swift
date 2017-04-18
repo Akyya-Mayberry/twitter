@@ -31,11 +31,11 @@ class TweetDetailsViewController: UIViewController {
     super.viewDidLoad()
     tweetText!.text = tweet?.text!
     tweetText!.sizeToFit()
-
+    
     // User retweeting or original user
     if tweet?.retweetedStatus != nil {
       originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"] as! String?
-     originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
+      originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
       let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
       if imagePath != nil {
         let imageURL = URL(string: imagePath!)
@@ -54,11 +54,11 @@ class TweetDetailsViewController: UIViewController {
         originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
       }
     }
-
+    
     originalTweeterImageView.layer.cornerRadius = 10
     originalTweeterImageView.clipsToBounds = true
     originalTweeterImageView.layer.borderWidth = 3
-
+    
     retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
     favoritesCountLabel.text = String(describing: (tweet?.favouriteCount)!)
     
@@ -72,18 +72,36 @@ class TweetDetailsViewController: UIViewController {
     formatter.dateFormat = "MM/dd/yy HH:mm"
     dateLabel.text = formatter.string(from: (tweet?.timestamp!)!)
     
-     //Time lapse/date for Tweet Post
-//          let formatter = DateFormatter()
-//          formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-//          let timestamp = tweet?.timestamp
-//          let now = Date()
-//          let timePassed = now.timeIntervalSince(timestamp!)
+    //Time lapse/date for Tweet Post
+    //          let formatter = DateFormatter()
+    //          formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+    //          let timestamp = tweet?.timestamp
+    //          let now = Date()
+    //          let timePassed = now.timeIntervalSince(timestamp!)
   }
   
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  @IBAction func onRetweet(_ sender: Any) {
+    let sender = sender as! UIButton
+    let id = tweet?.id!
+    let retweeted = tweet?.retweeted!
+    
+    TwitterClient.sharedInstance?.updateRetweetStatus(id: id!, to: retweeted!, success: { (response: Bool) in
+      self.tweet?.retweeted = response
+      
+      if response {
+        (sender as AnyObject).setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
+      } else {
+        sender.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
+      }
+    }, failure: { (error: Error) in
+      print("Issue retweeting, error: \(error)")
+    })
   }
   
   @IBAction func toggleFav(_ sender: Any) {
@@ -107,12 +125,12 @@ class TweetDetailsViewController: UIViewController {
   }
   
   // MARK: - Navigation
-   
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      let navigationController = segue.destination as! UINavigationController
-      let replyVC = navigationController.topViewController as! ReplyViewController
-      replyVC.tweets = tweets!
-      replyVC.tweet = tweets?[(indexPath?.row)!]
+    let navigationController = segue.destination as! UINavigationController
+    let replyVC = navigationController.topViewController as! ReplyViewController
+    replyVC.tweets = tweets!
+    replyVC.tweet = tweet
   }
- 
+  
 }

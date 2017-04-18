@@ -25,8 +25,6 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 100
     
-    print("######## here is a tweet, \(tweet)")
-    
     tableView.register(UINib(nibName: "ReplyCell", bundle: nil), forCellReuseIdentifier: "replyCell")
     
     
@@ -69,7 +67,6 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Any?) in
       if response != nil {
-//        print("Reply sent, response: \(response)")
         self.dismiss(animated: true)
       }
     }, failure: { (error: Error) in
