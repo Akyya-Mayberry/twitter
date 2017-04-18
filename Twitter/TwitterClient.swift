@@ -135,7 +135,7 @@ class TwitterClient: BDBOAuth1SessionManager {
       print("Retweet sent, response: \(response)")
       success(response)
     }, failure: { (task: URLSessionDataTask?, error: Error) in
-      print("Error occured posting retweet: \(error)")
+      print("Error occured posting reply: \(error)")
     })
   }
   

@@ -19,6 +19,8 @@ class TweetDetailsViewController: UIViewController {
   @IBOutlet weak var retweetsCountLabel: UILabel!
   @IBOutlet weak var favoritesCountLabel: UILabel!
   @IBOutlet weak var favButton: UIButton!
+  @IBOutlet weak var replyButton: UIButton!
+  @IBOutlet weak var retweetButton: UIButton!
   
   public var indexPath: IndexPath?
   public var tweets: [Tweet]?
@@ -89,12 +91,23 @@ class TweetDetailsViewController: UIViewController {
     })
   }
   
-  /* MARK: - Navigation
+  // MARK: - Navigation
    
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   
-   }
-   */
-  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    if segue.identifier == "replySegue" {
+      let navigationController = segue.destination as! UINavigationController
+      let replyVC = navigationController.topViewController as! ReplyViewController
+      
+      // Get the cell associated with the button that was clicked
+//      let sender = sender as! UIButton
+//      let cell = sender.superview?.superview as! UITableViewCell
+//      let indexPath = tableView.indexPath(for: cell)
+      
+      replyVC.tweets = tweets
+      replyVC.tweet = tweet!
+    }
+    
+  }
+ 
 }

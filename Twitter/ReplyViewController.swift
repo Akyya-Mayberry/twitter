@@ -61,7 +61,7 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     TwitterClient.sharedInstance?.sendReplyTo(tweet: id!, with: composeText, success: { (response: Any?) in
       if response != nil {
-        print("Reply sent, response: \(response)")
+//        print("Reply sent, response: \(response)")
         self.dismiss(animated: true)
       }
     }, failure: { (error: Error) in
