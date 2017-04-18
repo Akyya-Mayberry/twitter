@@ -113,7 +113,6 @@ class TweetDetailsViewController: UIViewController {
       let replyVC = navigationController.topViewController as! ReplyViewController
       replyVC.tweets = tweets!
       replyVC.tweet = tweets?[(indexPath?.row)!]
-
   }
  
 }
