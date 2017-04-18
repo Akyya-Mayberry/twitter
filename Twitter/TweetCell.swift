@@ -19,7 +19,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var retweeterImageView: UIImageView!
   @IBOutlet weak var retweeterNameLabel: UILabel!
-
+  
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!

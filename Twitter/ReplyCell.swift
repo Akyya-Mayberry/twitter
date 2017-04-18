@@ -40,12 +40,6 @@ class ReplyCell: UITableViewCell {
       tweeterImageView.clipsToBounds = true
       tweeterImageView.layer.borderWidth = 3
       
-      if tweet?.retweetedStatus != nil {
-        retweeterImageView.isHidden = false
-        retweeterNameLabel.isHidden = false
-        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String?) retweeted"
-      }
-      
       // Time lapse/date for Tweet Post
       let formatter = DateFormatter()
       formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
