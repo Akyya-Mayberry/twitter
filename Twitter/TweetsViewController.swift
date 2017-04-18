@@ -49,7 +49,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     return cell
   }
   
-  // Refresh data.
+  // Refresh data
   func refreshTweetsControl(_ refreshControl: UIRefreshControl) {
     // Fetch data
     TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets: [Tweet]) in
@@ -61,8 +61,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     })
   }
   
-  // Reverses the state of a retweet.
-  // Updates the tweet object and button to reflect the change.
   @IBAction func onRetweet(_ sender: Any) {
     let sender = sender as! UIButton
     let cell = sender.superview?.superview as! UITableViewCell
@@ -73,20 +71,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     TwitterClient.sharedInstance?.updateRetweetStatus(id: id!, to: retweeted!, success: { (response: Bool) in
       tweet?.retweeted = response
-      
+//      print("#### Is retweeted?, response: \(response)")
       if response {
         sender.setImage(#imageLiteral(resourceName: "retweeted"), for: .normal)
       } else {
         sender.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
       }
     }, failure: { (error: Error) in
-      print("Issue retweeting, error: \(error)")
+//      print("##### Issue retweeting, error: \(error)")
     })
   }
   
-  // Reverses the state of a favorited value of a tweet.
-  // Updates the tweet object and button to reflect the change.
   @IBAction func toggleFav(_ sender: Any) {
+    // Reverses the state of a favorited value of a tweet.
+    // Updates the tweet object and button to reflect the change.
     
     let sender = sender as! UIButton
     let cell = sender.superview?.superview as! UITableViewCell
