@@ -69,18 +69,15 @@ class TweetDetailsViewController: UIViewController {
     }
     
     let formatter = DateFormatter()
-    formatter.dateFormat = "HH:mm dd.MM.yy"
-    
+    formatter.dateFormat = "MM/dd/yy HH:mm"
     dateLabel.text = formatter.string(from: (tweet?.timestamp!)!)
-    //      dateLabel.text = String(describing: (tweet?.timestap)!)
     
-    // Time lapse/date for Tweet Post
-    //      let formatter = DateFormatter()
-    //      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-    //      let timestamp = tweet?.timestamp
-    //      let now = Date()
-    //      let timePassed = now.timeIntervalSince(timestamp!)
-    // Do any additional setup after loading the view.
+     //Time lapse/date for Tweet Post
+//          let formatter = DateFormatter()
+//          formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+//          let timestamp = tweet?.timestamp
+//          let now = Date()
+//          let timePassed = now.timeIntervalSince(timestamp!)
   }
   
   

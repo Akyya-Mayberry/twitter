@@ -20,11 +20,14 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var favButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var retweetImageView: UIImageView!
+  @IBOutlet weak var dateLabel: UILabel!
 
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
+      originalTweeterHandleLabel.sizeToFit()
+      
 //      nameLabel.text = tweet?.user?["name"] as? String
       
       if (tweet?.favorited)! as Bool {
@@ -78,10 +81,8 @@ class TweetCell: UITableViewCell {
       
       // Time lapse/date for Tweet Post
       let formatter = DateFormatter()
-      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-      let timestamp = tweet?.timestamp
-      let now = Date()
-      let timePassed = now.timeIntervalSince(timestamp!)
+      formatter.dateFormat = "MM/dd/yy HH:mm"
+      dateLabel.text = formatter.string(from: (tweet?.timestamp!)!)
     }
   }
   
