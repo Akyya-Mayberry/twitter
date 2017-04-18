@@ -19,12 +19,13 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var originalTweeterImageView: UIImageView!
   @IBOutlet weak var favButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
+  @IBOutlet weak var retweetImageView: UIImageView!
 
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
-      nameLabel.text = tweet?.user?["name"] as? String
+//      nameLabel.text = tweet?.user?["name"] as? String
       
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
@@ -44,9 +45,10 @@ class TweetCell: UITableViewCell {
       // User retweeting or original user tweet
       if tweet?.retweetedStatus != nil {
         nameLabel.isHidden = false
+        retweetImageView.isHidden = false
         nameLabel.text = "\(tweet?.user?["screen_name"] as! String) retweeted"
         originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"]! as! String?
-        originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
+        originalTweeterHandleLabel.text = "@\(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
         
         let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
         if imagePath != nil {
@@ -58,7 +60,7 @@ class TweetCell: UITableViewCell {
         
       } else {
         originalTweeterNameLabel.text = tweet?.user?["name"]! as! String?
-        originalTweeterHandleLabel.text = "@ \(tweet?.user?["screen_name"]! as! String)"
+        originalTweeterHandleLabel.text = "@\(tweet?.user?["screen_name"]! as! String)"
         
         let imagePath = tweet?.user?["profile_image_url_https"] as? String
         if imagePath != nil {

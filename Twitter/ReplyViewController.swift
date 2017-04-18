@@ -25,7 +25,11 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 100
     
+    print("######## here is a tweet, \(tweet)")
+    
     tableView.register(UINib(nibName: "ReplyCell", bundle: nil), forCellReuseIdentifier: "replyCell")
+    
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -44,7 +48,11 @@ class ReplyViewController: UIViewController, UITableViewDataSource, UITableViewD
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "replyCell") as! ReplyCell
-    cell.tweet = tweet
+    
+    if tweet != nil {
+      cell.tweet = tweet!
+    }
+    
     return cell
   }
   

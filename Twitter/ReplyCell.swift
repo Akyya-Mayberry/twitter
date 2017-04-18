@@ -19,33 +19,67 @@ class ReplyCell: UITableViewCell {
   @IBOutlet weak var tweetText: UILabel!
   @IBOutlet weak var composeText: UITextView!
   
+  @IBOutlet weak var retweetImageView: UIImageView!
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
       composeText.sizeToFit()
-      nameLabel.text = tweet?.user?["name"] as? String
-      originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"] as! String)!"
+//      nameLabel.text = tweet?.user?["name"] as? String
+//      originalTweeterHandleLabel.text = "@hello!"
       
-      let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
+//      let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
+//      
+//      if imagePath != nil && !((imagePath?.isEmpty)!) {
+//        let imageURL = URL(string: imagePath!)
+//        originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+//      } else {
+//        originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+//      }
       
-      if imagePath != nil && !((imagePath?.isEmpty)!) {
-        let imageURL = URL(string: imagePath!)
-        originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+      
+      
+      if tweet?.retweetedStatus != nil {
+        nameLabel.isHidden = false
+        retweetImageView.isHidden = false
+        nameLabel.text = "\(tweet?.user?["screen_name"] as! String) retweeted"
+        originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"] as! String?
+        originalTweeterHandleLabel.text = "@\(tweet?.retweetOriginalUser?["screen_name"] as! String)"
+        let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
+        
+        if imagePath != nil && !((imagePath?.isEmpty)!) {
+          let imageURL = URL(string: imagePath!)
+          originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+        } else {
+          originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        }
+        
       } else {
-        originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        originalTweeterNameLabel.text = tweet?.user?["name"] as! String?
+        originalTweeterHandleLabel.text = "@\(tweet?.user?["screen_name"] as! String)"
+        
+        let imagePath = tweet?.user?["profile_image_url_https"] as? String
+        
+        if imagePath != nil && !((imagePath?.isEmpty)!) {
+          let imageURL = URL(string: imagePath!)
+          originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+        } else {
+          originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        }
+
       }
+      
       
       originalTweeterImageView.layer.cornerRadius = 10
       originalTweeterImageView.clipsToBounds = true
       originalTweeterImageView.layer.borderWidth = 3
       
       // Time lapse/date for Tweet Post
-      let formatter = DateFormatter()
-      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
-      let timestamp = tweet?.timestamp
-      let now = Date()
-      let timePassed = now.timeIntervalSince(timestamp!)
+//      let formatter = DateFormatter()
+//      formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+//      let timestamp = tweet?.timestamp
+//      let now = Date()
+//      let timePassed = now.timeIntervalSince(timestamp!)
     }
   }
   

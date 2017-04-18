@@ -75,7 +75,7 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-cF-Chy">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="twitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-cF-Chy">
                         <rect key="frame" x="54" y="8" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="0O9-Mq-75R"/>
@@ -118,13 +118,13 @@
                 <outlet property="originalTweeterHandleLabel" destination="ng6-13-lho" id="lIw-L0-aCg"/>
                 <outlet property="originalTweeterImageView" destination="3A3-wF-vph" id="zgX-9A-s3Q"/>
                 <outlet property="originalTweeterNameLabel" destination="maR-fK-pRl" id="QxH-u9-xSS"/>
+                <outlet property="retweetImageView" destination="AHC-cF-Chy" id="Hna-w7-gVW"/>
                 <outlet property="tweetText" destination="Upk-oW-35v" id="T6h-1h-WBr"/>
             </connections>
-            <point key="canvasLocation" x="17.5" y="189"/>
+            <point key="canvasLocation" x="-177" y="174"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="retweet" width="120" height="120"/>
         <image name="twitterLogo" width="200" height="200"/>
     </resources>
 </document>

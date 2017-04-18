@@ -22,17 +22,16 @@ class TweetDetailsViewController: UIViewController {
   @IBOutlet weak var replyButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
   
-  public var indexPath: IndexPath?
-  public var tweets: [Tweet]?
-  public var tweet: Tweet?
-  public var sender: TweetCell?
+  var indexPath: IndexPath?
+  var tweets: [Tweet]?
+  var tweet: Tweet?
+  var sender: TweetCell?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tweetText!.text = tweet?.text!
     tweetText!.sizeToFit()
-    
-    
+
     // User retweeting or original user
     if tweet?.retweetedStatus != nil {
       originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"] as! String?
@@ -46,7 +45,7 @@ class TweetDetailsViewController: UIViewController {
       }
     } else {
       originalTweeterNameLabel.text = tweet?.user?["name"] as! String?
-      originalTweeterHandleLabel.text = "@ \(tweet?.user?["screen_name"]! as! String)"
+      originalTweeterHandleLabel.text = "@\(tweet?.user?["screen_name"]! as! String)"
       let imagePath = tweet?.user?["profile_image_url_https"] as? String
       if imagePath != nil {
         let imageURL = URL(string: imagePath!)
@@ -59,15 +58,9 @@ class TweetDetailsViewController: UIViewController {
     originalTweeterImageView.layer.cornerRadius = 10
     originalTweeterImageView.clipsToBounds = true
     originalTweeterImageView.layer.borderWidth = 3
-    
-    
-    
 
-    
     retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
     favoritesCountLabel.text = String(describing: (tweet?.favouriteCount)!)
-    
-
     
     if (tweet?.favorited)! as Bool {
       favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
@@ -119,20 +112,11 @@ class TweetDetailsViewController: UIViewController {
   // MARK: - Navigation
    
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-    if segue.identifier == "replySegue" {
       let navigationController = segue.destination as! UINavigationController
       let replyVC = navigationController.topViewController as! ReplyViewController
-      
-      // Get the cell associated with the button that was clicked
-//      let sender = sender as! UIButton
-//      let cell = sender.superview?.superview as! UITableViewCell
-//      let indexPath = tableView.indexPath(for: cell)
-      
-      replyVC.tweets = tweets
-      replyVC.tweet = tweet!
-    }
-    
+      replyVC.tweets = tweets!
+      replyVC.tweet = tweets?[(indexPath?.row)!]
+
   }
  
 }
