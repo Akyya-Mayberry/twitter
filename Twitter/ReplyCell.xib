@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="729" height="552"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="729" height="552"/>
+                <rect key="frame" x="0.0" y="0.0" width="729" height="551"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwW-us-2YD">
@@ -92,27 +92,10 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bkv-xy-mEF">
-                        <rect key="frame" x="346.5" y="295" width="36" height="32.5"/>
-                        <state key="normal">
-                            <attributedString key="attributedTitle">
-                                <fragment content="Send">
-                                    <attributes>
-                                        <color key="NSColor" red="0.63391359059999997" green="0.73754718959999999" blue="0.83798238260000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <font key="NSFont" size="15" name="AvenirNext-Regular"/>
-                                    </attributes>
-                                </fragment>
-                            </attributedString>
-                        </state>
-                        <connections>
-                            <action selector="onSend:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="I7A-Qa-3ZF"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ng6-13-lho" firstAttribute="leading" secondItem="maR-fK-pRl" secondAttribute="trailing" constant="3" id="03C-Mq-oDn"/>
                     <constraint firstItem="maR-fK-pRl" firstAttribute="leading" secondItem="3A3-wF-vph" secondAttribute="trailing" constant="6" id="247-wd-gr4"/>
-                    <constraint firstItem="Bkv-xy-mEF" firstAttribute="top" secondItem="a6y-XH-Zsx" secondAttribute="bottom" constant="15" id="4R5-uX-jBZ"/>
                     <constraint firstItem="AHC-cF-Chy" firstAttribute="trailing" secondItem="3A3-wF-vph" secondAttribute="trailing" id="67Y-Sm-X0x"/>
                     <constraint firstItem="3A3-wF-vph" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="994-GJ-53S"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Upk-oW-35v" secondAttribute="bottom" constant="5" id="DJE-H5-gkq"/>
@@ -126,18 +109,16 @@
                     <constraint firstItem="Upk-oW-35v" firstAttribute="top" secondItem="ng6-13-lho" secondAttribute="bottom" constant="2" id="lSg-Pn-Xs6"/>
                     <constraint firstItem="maR-fK-pRl" firstAttribute="leading" secondItem="IwW-us-2YD" secondAttribute="leading" id="plc-gD-QIt"/>
                     <constraint firstItem="Upk-oW-35v" firstAttribute="leading" secondItem="IwW-us-2YD" secondAttribute="leading" id="sQ8-Gf-epz"/>
-                    <constraint firstItem="Bkv-xy-mEF" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="z7E-9z-DRS"/>
                     <constraint firstItem="ng6-13-lho" firstAttribute="top" secondItem="IwW-us-2YD" secondAttribute="bottom" constant="5" id="zDc-sf-BbM"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="composeText" destination="a6y-XH-Zsx" id="R2y-jQ-xFd"/>
-                <outlet property="handleLabel" destination="ng6-13-lho" id="vEI-1O-hoS"/>
-                <outlet property="nameLabel" destination="maR-fK-pRl" id="Bkn-Ja-s8l"/>
-                <outlet property="retweeterImageView" destination="AHC-cF-Chy" id="KQs-SQ-GSs"/>
-                <outlet property="retweeterNameLabel" destination="IwW-us-2YD" id="C3q-Ck-ax6"/>
+                <outlet property="nameLabel" destination="IwW-us-2YD" id="H8p-e2-orI"/>
+                <outlet property="originalTweeterHandleLabel" destination="ng6-13-lho" id="lIw-L0-aCg"/>
+                <outlet property="originalTweeterImageView" destination="3A3-wF-vph" id="zgX-9A-s3Q"/>
+                <outlet property="originalTweeterNameLabel" destination="maR-fK-pRl" id="QxH-u9-xSS"/>
                 <outlet property="tweetText" destination="Upk-oW-35v" id="T6h-1h-WBr"/>
-                <outlet property="tweeterImageView" destination="3A3-wF-vph" id="foE-d7-Kja"/>
             </connections>
             <point key="canvasLocation" x="17.5" y="189"/>
         </tableViewCell>

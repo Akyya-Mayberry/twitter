@@ -11,11 +11,11 @@ import AFNetworking
 import BDBOAuth1Manager
 
 class ReplyCell: UITableViewCell {
-  @IBOutlet weak var retweeterImageView: UIImageView!
-  @IBOutlet weak var retweeterNameLabel: UILabel!
-  @IBOutlet weak var tweeterImageView: UIImageView!
+
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var handleLabel: UILabel!
+  @IBOutlet weak var originalTweeterNameLabel: UILabel!
+  @IBOutlet weak var originalTweeterImageView: UIImageView!
+  @IBOutlet weak var originalTweeterHandleLabel: UILabel!
   @IBOutlet weak var tweetText: UILabel!
   @IBOutlet weak var composeText: UITextView!
   
@@ -25,20 +25,20 @@ class ReplyCell: UITableViewCell {
       tweetText!.sizeToFit()
       composeText.sizeToFit()
       nameLabel.text = tweet?.user?["name"] as? String
-      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)!"
+      originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"] as! String)!"
       
-      let imagePath = tweet?.user?["profile_image_url_https"] as? String
+      let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
       
       if imagePath != nil && !((imagePath?.isEmpty)!) {
         let imageURL = URL(string: imagePath!)
-        tweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+        originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
       } else {
-        tweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
       }
       
-      tweeterImageView.layer.cornerRadius = 10
-      tweeterImageView.clipsToBounds = true
-      tweeterImageView.layer.borderWidth = 3
+      originalTweeterImageView.layer.cornerRadius = 10
+      originalTweeterImageView.clipsToBounds = true
+      originalTweeterImageView.layer.borderWidth = 3
       
       // Time lapse/date for Tweet Post
       let formatter = DateFormatter()

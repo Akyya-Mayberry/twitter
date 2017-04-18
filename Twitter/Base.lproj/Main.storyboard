@@ -133,7 +133,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="1820D8C8-47EE-4B1A-9436-6E70A0C03799" translatesAutoresizingMaskIntoConstraints="NO" id="hoq-Ff-6bT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="697210E5-C84C-48A6-8E2A-3DB8F56FB1E2" translatesAutoresizingMaskIntoConstraints="NO" id="hoq-Ff-6bT">
                                 <rect key="frame" x="16" y="72" width="66" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="AJl-QU-9D8"/>
@@ -193,7 +193,7 @@
                                         </constraints>
                                         <state key="normal" title="REPLY" image="reply"/>
                                         <connections>
-                                            <segue destination="HEP-bm-6JE" kind="show" identifier="replySegue" id="PXW-3e-UaO"/>
+                                            <segue destination="HEP-bm-6JE" kind="show" id="PXW-3e-UaO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hB-xd-oqE">
@@ -203,6 +203,9 @@
                                             <constraint firstAttribute="width" constant="20" id="opN-hD-fCE"/>
                                         </constraints>
                                         <state key="normal" title="Retweet" image="retweet"/>
+                                        <connections>
+                                            <action selector="onRetweet:" destination="4z7-JO-WUV" eventType="touchUpInside" id="tDe-yN-m5i"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sM4-RV-Ugb">
                                         <rect key="frame" x="148" y="0.0" width="20" height="20"/>
@@ -210,7 +213,7 @@
                                             <constraint firstAttribute="width" constant="20" id="9YB-kI-w3J"/>
                                             <constraint firstAttribute="height" constant="20" id="I4c-3I-vLi"/>
                                         </constraints>
-                                        <state key="normal" title="REPLY" image="24D8405D-EDE9-4DFC-BA29-5BDCF9BF929E"/>
+                                        <state key="normal" title="REPLY" image="6FC3428F-BD13-4E6C-90B2-F939A4031647"/>
                                         <connections>
                                             <action selector="toggleFav:" destination="4z7-JO-WUV" eventType="touchUpInside" id="56C-46-Q3U"/>
                                         </connections>
@@ -249,13 +252,13 @@
                         <outlet property="dateLabel" destination="a8Y-SI-p1F" id="kPQ-td-8JI"/>
                         <outlet property="favButton" destination="sM4-RV-Ugb" id="luL-5X-OzZ"/>
                         <outlet property="favoritesCountLabel" destination="MYG-0s-yAi" id="ta2-DF-ojl"/>
-                        <outlet property="handleLabel" destination="hTk-ck-gSJ" id="CkV-ls-T7e"/>
-                        <outlet property="nameLabel" destination="hgM-Vp-1QX" id="3au-P0-NC3"/>
+                        <outlet property="originalTweeterHandleLabel" destination="hTk-ck-gSJ" id="ds0-fU-CjB"/>
+                        <outlet property="originalTweeterImageView" destination="hoq-Ff-6bT" id="A9J-mb-VbI"/>
+                        <outlet property="originalTweeterNameLabel" destination="hgM-Vp-1QX" id="Vgj-as-EyF"/>
                         <outlet property="replyButton" destination="Blr-Pn-lVM" id="Qth-z8-8w2"/>
                         <outlet property="retweetButton" destination="4hB-xd-oqE" id="baM-un-3e8"/>
                         <outlet property="retweetsCountLabel" destination="Cn8-tk-7L5" id="ngW-eq-he3"/>
                         <outlet property="tweetText" destination="nXO-aK-um0" id="1jp-cd-lS8"/>
-                        <outlet property="tweeterImageView" destination="hoq-Ff-6bT" id="zD3-bE-M3n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hoC-Yn-Bga" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,7 +349,7 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="Irw-CH-wMG">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="twitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Irw-CH-wMG">
                                                     <rect key="frame" x="54" y="8" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="SZr-rE-dcN"/>
@@ -416,13 +419,12 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="favButton" destination="Ool-yY-Ni7" id="f18-hc-jWE"/>
-                                            <outlet property="handleLabel" destination="wiv-hy-Q3o" id="2yK-hq-ZXJ"/>
-                                            <outlet property="nameLabel" destination="2iS-E6-B0o" id="NVM-eF-hlI"/>
+                                            <outlet property="nameLabel" destination="oll-Df-DYI" id="xLR-O6-Ouz"/>
+                                            <outlet property="originalTweeterHandleLabel" destination="wiv-hy-Q3o" id="azn-9Y-f6S"/>
+                                            <outlet property="originalTweeterImageView" destination="7rf-7P-5I6" id="bsp-bJ-gCn"/>
+                                            <outlet property="originalTweeterNameLabel" destination="2iS-E6-B0o" id="ksn-tk-o5q"/>
                                             <outlet property="retweetButton" destination="eDf-Cp-dne" id="omA-xy-j5U"/>
-                                            <outlet property="retweeterImageView" destination="Irw-CH-wMG" id="byr-fZ-apD"/>
-                                            <outlet property="retweeterNameLabel" destination="oll-Df-DYI" id="tEk-VX-ZsN"/>
                                             <outlet property="tweetText" destination="QKB-d0-AxF" id="49i-3q-cH6"/>
-                                            <outlet property="userImageView" destination="7rf-7P-5I6" id="9Np-rZ-naY"/>
                                             <segue destination="4z7-JO-WUV" kind="show" identifier="detailsSegue" id="auM-PW-d71"/>
                                         </connections>
                                     </tableViewCell>
@@ -605,7 +607,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1820D8C8-47EE-4B1A-9436-6E70A0C03799" width="200" height="200">
+        <image name="697210E5-C84C-48A6-8E2A-3DB8F56FB1E2" width="200" height="200">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3325,7 +3327,7 @@ AAJ65wACeuwAAnr7AAJ6/wACewYAAnsOAAJ7GwACeyAAAnsiAAJ7JAACeykAAnsxAAJ7NAACezkAAntB
 AAJ7RAACe1YAAntZAAJ7XgAAAAAAAAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAntgA
 </mutableData>
         </image>
-        <image name="24D8405D-EDE9-4DFC-BA29-5BDCF9BF929E" width="120" height="120">
+        <image name="6FC3428F-BD13-4E6C-90B2-F939A4031647" width="120" height="120">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4342,6 +4344,6 @@ AL8AxADbAN0A3+qB6obqkeqa6q3qseq86sXqyurS6tXq2urp6u3q9Or86wnrDusQ6xLrF+sf6yLrJ+sv
         <image name="unfav" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PXW-3e-UaO"/>
+        <segue reference="ePq-Eg-nDf"/>
     </inferredMetricsTieBreakers>
 </document>

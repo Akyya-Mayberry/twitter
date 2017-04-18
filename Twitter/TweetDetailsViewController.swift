@@ -9,13 +9,13 @@
 import UIKit
 
 class TweetDetailsViewController: UIViewController {
-  @IBOutlet weak var retweetImageView: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var handleLabel: UILabel!
+  
+  @IBOutlet weak var originalTweeterNameLabel: UILabel!
+  @IBOutlet weak var originalTweeterHandleLabel: UILabel!
+  @IBOutlet weak var originalTweeterImageView: UIImageView!
   @IBOutlet weak var tweetText: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var actionsStackView: UIStackView!
-  @IBOutlet weak var tweeterImageView: UIImageView!
   @IBOutlet weak var retweetsCountLabel: UILabel!
   @IBOutlet weak var favoritesCountLabel: UILabel!
   @IBOutlet weak var favButton: UIButton!
@@ -31,18 +31,43 @@ class TweetDetailsViewController: UIViewController {
     super.viewDidLoad()
     tweetText!.text = tweet?.text!
     tweetText!.sizeToFit()
-    nameLabel.text = tweet?.user?["name"] as! String?
-    handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
+    
+    
+    // User retweeting or original user
+    if tweet?.retweetedStatus != nil {
+      originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"] as! String?
+     originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
+      let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
+      if imagePath != nil {
+        let imageURL = URL(string: imagePath!)
+        originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+      } else {
+        originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+      }
+    } else {
+      originalTweeterNameLabel.text = tweet?.user?["name"] as! String?
+      originalTweeterHandleLabel.text = "@ \(tweet?.user?["screen_name"]! as! String)"
+      let imagePath = tweet?.user?["profile_image_url_https"] as? String
+      if imagePath != nil {
+        let imageURL = URL(string: imagePath!)
+        originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+      } else {
+        originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+      }
+    }
+
+    originalTweeterImageView.layer.cornerRadius = 10
+    originalTweeterImageView.clipsToBounds = true
+    originalTweeterImageView.layer.borderWidth = 3
+    
+    
+    
+
+    
     retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
     favoritesCountLabel.text = String(describing: (tweet?.favouriteCount)!)
-    let imagePath = tweet?.user?["profile_image_url_https"] as? String
     
-    if imagePath != nil {
-      let imageURL = URL(string: imagePath!)
-      tweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
-    } else {
-      tweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
-    }
+
     
     if (tweet?.favorited)! as Bool {
       favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)

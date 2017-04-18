@@ -10,34 +10,21 @@ import UIKit
 import AFNetworking
 
 class TweetCell: UITableViewCell {
+  
   @IBOutlet weak var timeLapseLabel: UILabel!
   @IBOutlet weak var tweetText: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var handleLabel: UILabel!
-  @IBOutlet weak var userImageView: UIImageView!
+  @IBOutlet weak var originalTweeterNameLabel: UILabel!
+  @IBOutlet weak var originalTweeterHandleLabel: UILabel!
+  @IBOutlet weak var originalTweeterImageView: UIImageView!
   @IBOutlet weak var favButton: UIButton!
   @IBOutlet weak var retweetButton: UIButton!
-  @IBOutlet weak var retweeterImageView: UIImageView!
-  @IBOutlet weak var retweeterNameLabel: UILabel!
-  
+
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
       nameLabel.text = tweet?.user?["name"] as? String
-      handleLabel.text = "@ \(tweet?.user?["screen_name"] as! String)"
-      let imagePath = tweet?.user?["profile_image_url_https"] as? String
-      
-      if imagePath != nil {
-        let imageURL = URL(string: imagePath!)
-        userImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
-      } else {
-        userImageView.image = #imageLiteral(resourceName: "twitterLogo")
-      }
-      
-      userImageView.layer.cornerRadius = 10
-      userImageView.clipsToBounds = true
-      userImageView.layer.borderWidth = 3
       
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
@@ -54,11 +41,38 @@ class TweetCell: UITableViewCell {
         retweetButton.setImage(#imageLiteral(resourceName: "retweet"), for: .normal)
       }
       
+      // User retweeting or original user tweet
       if tweet?.retweetedStatus != nil {
-        retweeterImageView.isHidden = false
-        retweeterNameLabel.isHidden = false
-        retweeterNameLabel.text = "\(tweet?.retweetUser?["screen_name"] as! String) retweeted"
+        nameLabel.isHidden = false
+        nameLabel.text = "\(tweet?.user?["screen_name"] as! String) retweeted"
+        originalTweeterNameLabel.text = tweet?.retweetOriginalUser?["name"]! as! String?
+        originalTweeterHandleLabel.text = "@ \(tweet?.retweetOriginalUser?["screen_name"]! as! String)"
+        
+        let imagePath = tweet?.retweetOriginalUser?["profile_image_url_https"] as? String
+        if imagePath != nil {
+          let imageURL = URL(string: imagePath!)
+          originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+        } else {
+          originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        }
+        
+      } else {
+        originalTweeterNameLabel.text = tweet?.user?["name"]! as! String?
+        originalTweeterHandleLabel.text = "@ \(tweet?.user?["screen_name"]! as! String)"
+        
+        let imagePath = tweet?.user?["profile_image_url_https"] as? String
+        if imagePath != nil {
+          let imageURL = URL(string: imagePath!)
+          originalTweeterImageView.setImageWith(imageURL!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
+        } else {
+          originalTweeterImageView.image = #imageLiteral(resourceName: "twitterLogo")
+        }
       }
+      
+      originalTweeterImageView.layer.cornerRadius = 10
+      originalTweeterImageView.clipsToBounds = true
+      originalTweeterImageView.layer.borderWidth = 3
+      
       
       // Time lapse/date for Tweet Post
       let formatter = DateFormatter()
