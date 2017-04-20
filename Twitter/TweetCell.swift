@@ -21,12 +21,17 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var retweetImageView: UIImageView!
   @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var repliesCountLabel: UILabel!
+  @IBOutlet weak var retweetsCountLabel: UILabel!
+  @IBOutlet weak var favoritesCountLabel: UILabel!
   
   var tweet: Tweet? {
     didSet {
       tweetText!.text = tweet?.text!
       tweetText!.sizeToFit()
       originalTweeterHandleLabel.sizeToFit()
+      retweetsCountLabel.text = String(describing: (tweet?.retweetCount)!)
+      favoritesCountLabel.text = String(describing: (tweet?.favouriteCount)!)
       
       if (tweet?.favorited)! as Bool {
         favButton.setImage(#imageLiteral(resourceName: "fav"), for: .normal)
@@ -60,6 +65,8 @@ class TweetCell: UITableViewCell {
         }
         
       } else {
+        nameLabel.isHidden = true
+        retweetImageView.isHidden = true
         originalTweeterNameLabel.text = tweet?.user?["name"]! as! String?
         originalTweeterHandleLabel.text = "@\(tweet?.user?["screen_name"]! as! String)"
         

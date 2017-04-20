@@ -38,7 +38,7 @@ class Tweet: NSObject {
     
     // Not sure twitter includes favorites count anymore
     // Favourites_count is listed under the user key.
-    favouriteCount = dictionary["favourite_count"] as? Int ?? 0
+    favouriteCount = dictionary["favorite_count"] as? Int ?? 0
     
     // If a date is retrieved in dict, parse it
     if let timeStampString = dictionary["created_at"] {
