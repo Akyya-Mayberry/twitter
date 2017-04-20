@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
@@ -26,11 +27,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     tableView.rowHeight = UITableViewAutomaticDimension
     
     // Retrieve user's twitter feed
+    MBProgressHUD.showAdded(to: view, animated: true)
+    
     TwitterClient.sharedInstance?.homeTimeLine(tweetsBeforeID: oldestTweetID, success: { (tweets: [Tweet]) in
+      
+      MBProgressHUD.hide(for: self.view, animated: true)
       self.tweets = tweets
       self.oldestTweetID = (self.tweets?.last)?.id
-//      print("Tweets view controller oldest tweet, \(self.oldestTweetID)")
-//      print("and here is the tweet text, \(self.tweets?.last?.text)")
       self.tableView.reloadData()
     }, failure: { (error: Error) in
       print("Error retrieving tweets: \(error)")
@@ -105,6 +108,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     let tweet = tweets?[(indexPath?.row)!]
     let id = tweet?.id!
     let retweeted = tweet?.retweeted!
+    
     
     TwitterClient.sharedInstance?.updateRetweetStatus(id: id!, to: retweeted!, success: { (response: Bool) in
       tweet?.retweeted = response
