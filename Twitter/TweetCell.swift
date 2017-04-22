@@ -9,6 +9,10 @@
 import UIKit
 import AFNetworking
 
+@objc protocol TweetCellDelegate {
+  @objc func TweetCell(tweetCell: TweetCell, didTap value: Bool)
+}
+
 class TweetCell: UITableViewCell {
   
   @IBOutlet weak var timeLapseLabel: UILabel!
@@ -24,6 +28,8 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var repliesCountLabel: UILabel!
   @IBOutlet weak var retweetsCountLabel: UILabel!
   @IBOutlet weak var favoritesCountLabel: UILabel!
+  
+  weak var delegate: TweetCellDelegate?
   
   var tweet: Tweet? {
     didSet {
@@ -88,12 +94,17 @@ class TweetCell: UITableViewCell {
       let formatter = DateFormatter()
       formatter.dateFormat = "MM/dd/yy HH:mm"
       dateLabel.text = formatter.string(from: (tweet?.timestamp!)!)
+      
     }
   }
   
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
+    // Set up gesture tap for image to view user profile
+    let profileTap = UITapGestureRecognizer(target: self, action: #selector(onImageTap(sender:)))
+    originalTweeterImageView.addGestureRecognizer(profileTap)
+    originalTweeterImageView.isUserInteractionEnabled = true
     
   }
   
@@ -103,4 +114,8 @@ class TweetCell: UITableViewCell {
     // Configure the view for the selected state
   }
   
+  func onImageTap(sender: UIGestureRecognizer) {
+    print("image tapped!!!")
+    delegate?.TweetCell(tweetCell: self, didTap: true)
+  }
 }

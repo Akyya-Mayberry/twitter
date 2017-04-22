@@ -16,17 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
-    
-    // Current logged in users are redirected to their feed.
     if User.currentUser != nil {
       
-      // Get the main storyboard and set its root view controller to the tweets view controller.
+      // Get the main storyboard and set its root view controller to the container view controller.
       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-      let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+      let containerVC = storyboard.instantiateViewController(withIdentifier: "containerViewController") as! ContainerViewController
+      window?.rootViewController = containerVC
       
-      //The window is what is what view currently display in the screen.
-      window?.rootViewController = vc
+      // Set up menu view controller and give it access to control container's content view
+      let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController") as! MenuViewController
+      menuViewController.containerViewController = containerVC
+      containerVC.menuViewController = menuViewController
     }
     
     // Listen for when a user logs out so they are redirected login screen.

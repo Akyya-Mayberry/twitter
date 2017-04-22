@@ -9,7 +9,8 @@
 import UIKit
 import MBProgressHUD
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -58,6 +59,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     return cell
   }
   
+  // MARK: UPDATE DATA
+  
   // Refresh data
   func refreshTweetsControl(_ refreshControl: UIRefreshControl) {
     // Fetch data
@@ -97,6 +100,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         loadMoreData()
       }
     }
+  }
+  
+  // MARK: USER INTERACTIONS
+  
+  
+  // View a users profile page
+  func TweetCell(tweetCell: TweetCell, didTap value: Bool) {
+    print("#### did tap value is, \(value)")
   }
   
   // Reverses the state of a retweet.
@@ -150,6 +161,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     TwitterClient.sharedInstance?.logout()
   }
   
+  
+  // MARK: NAVIGATION
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "detailsSegue" {
       let detailsVC = segue.destination as! DetailsTableViewController
