@@ -105,7 +105,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   
   // MARK: USER INTERACTIONS
   
-  
   // View a users profile page
   func TweetCell(tweetCell: TweetCell, didTap value: Bool) {
     print("#### did tap value is, \(value)")
