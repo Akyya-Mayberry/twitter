@@ -55,6 +55,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell") as! TweetCell
     cell.tweet = tweets?[indexPath.row]
+    cell.delegate = self
     
     return cell
   }
@@ -108,6 +109,16 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   // View a users profile page
   func TweetCell(tweetCell: TweetCell, didTap value: Bool) {
     print("#### did tap value is, \(value)")
+    let indexPath = tableView.indexPath(for: tweetCell)
+    let tweet = tweets?[(indexPath?.row)!]
+    
+    // Segue to profile section with the correct tweet
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+    print("HERE IS TWEET !!!! \(tweet)")
+    profileVC.tweet = tweet
+    
+    present(profileVC, animated: true, completion: nil)
   }
   
   // Reverses the state of a retweet.

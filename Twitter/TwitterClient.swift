@@ -139,6 +139,18 @@ class TwitterClient: BDBOAuth1SessionManager {
     })
   }
   
+  func getUserTimeLine(for id: Int, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+//    get("https://api.twitter.com/1.1/statuses/user_timeline.json", parameters: ["user_id": id], p
+    get("https://api.twitter.com/1.1/statuses/user_timeline.json", parameters: ["user_id": id], progress: { (nil) in
+      print("Progress...")
+    }, success: { (task: URLSessionDataTask, response: Any?) in
+      let tweetsAsDicts = response as! [NSDictionary]
+      let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)
+      success(tweets)
+    }) { (task: URLSessionDataTask?, error: Error) in
+      failure(error)
+    }
+  }
   
   func sendReplyTo(tweet id: Int, with reply: String,  success: @escaping (Any?) -> (), failure: @escaping (Error) -> ()) {
     post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in

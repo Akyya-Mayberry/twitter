@@ -115,7 +115,7 @@ class TweetCell: UITableViewCell {
   }
   
   func onImageTap(sender: UIGestureRecognizer) {
-    print("image tapped!!!")
+//    print("image tapped!!!")
     delegate?.TweetCell(tweetCell: self, didTap: true)
   }
 }

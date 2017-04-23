@@ -9,16 +9,23 @@
 import UIKit
 
 class User: NSObject {
+  var id: Int?
   var name: String?
   var screenname: String?
   var profileUrl: URL?
   var tagline: String?
   var dictionary: NSDictionary?
+  var following: Int?
+  var followers: Int?
   
   init(dictionary: NSDictionary){
     self.dictionary = dictionary
+    id = dictionary["id"] as? Int
     name = dictionary["name"] as? String
     screenname = dictionary["screen_name"] as? String
+    following = dictionary["friends_count"] as? Int
+    followers = dictionary["followers_count"] as? Int
+    
     
     if let profileUrlString = dictionary["profile_image_url_https"] as? String {
       profileUrl = URL(string: profileUrlString)
