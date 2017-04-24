@@ -1,51 +1,57 @@
-# Project 3 - *Simple Twitter Client*
+# Project 4 - *Twitter Redux*
 
-**Simple Twitter Client** is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
-
-Time spent: **26** hours spent in total
+Time spent: **17** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [X] User can sign in using OAuth login flow.
-- [X] User can view last 20 tweets from their home timeline.
-- [X] The current signed in user will be persisted across restarts.
-- [-] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.  In other words, design the custom cell with the proper Auto Layout settings.  You will also need to augment the model classes.
-- [X] User can pull to refresh.
-- [X] User can compose a new tweet by tapping on a compose button.
-- [-] User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
+- [X] Hamburger menu
+   - [X] Dragging anywhere in the view should reveal the menu.
+   - [X] The menu should include links to your profile, the home timeline, and the mentions view.
+   - [X] The menu can look similar to the example or feel free to take liberty with the UI.
+- [ ] Profile page
+   - [X] Contains the user header view
+   - [X] Contains a section with the users basic stats: # tweets, # following, # followers
+- [X] Home Timeline
+   - [X] Tapping on a user image should bring up that user's profile page
 
 The following **optional** features are implemented:
 
-- [ ] When composing, you should have a countdown in the upper right for the tweet limit.
-- [X] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
-- [-] Retweeting and favoriting should increment the retweet and favorite count.
-- [-] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
-- [-] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [ ] Profile Page
+   - [ ] Implement the paging view for the user description.
+   - [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
+   - [ ] Pulling down the profile page should blur and resize the header image.
+- [ ] Account switching
+   - [ ] Long press on tab bar to bring up Account view with animation
+   - [ ] Tap account to switch to
+   - [ ] Include a plus button to Add an Account
+   - [ ] Swipe to delete an account
+
 
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
-
+If I was a first time user of the app and new to smartphones, I would have no idea that I can pan to see a side menu. I would update UI to include some sort of indicator. 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. Flow of app creation using table views, reusable cells, and delegates. I will like the whole picture in visuals or 1 single tutorial. Assignments build up from previous and not getting previous down hurts the future assignments.
-2. If a retweet/favorite is done in one view controller, how is this updated across all view controllers? Delegate? How do I can I accomplish this?
+  1.I may find out these two question on my own before class, but just in case, why use regular views instead of container views from the object library?
+  2. When the screen is rotated while I am displaying my hamburger menu, why does my main container view disappear off screen?
+
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://cloud.githubusercontent.com/assets/13710170/25081309/5d8476ca-22fe-11e7-95c9-b8eee0a64395.gif' width='' alt='Video Walkthrough' />
+<img src='https://cloud.githubusercontent.com/assets/13710170/25319454/33a8bd2a-2853-11e7-95ca-0b806ccc7c56.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
-I hit a few challenges. I had issues with a tweet favorites count not being correct in the response. It always returned 0, even though that is not the case. I also had issues with retrieving data from a reusable cell when clicking a send button located on the navigation bar. Lastly, sharing data across multiple view controllers continue to be a bit of challenge for me.
+The videos provided and the class assignments were extremely helpful getting through this assignment. It was fun. the only challenge was that we formed groups and had our first assignment. The group project is exciting so it was hard to balance time between that and this assignment. 
+
 ## License
 
     Copyright [yyyy] [name of copyright owner]
