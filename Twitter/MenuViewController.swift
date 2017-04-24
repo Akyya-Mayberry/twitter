@@ -14,6 +14,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   private var profileViewController: UIViewController!
   private var tweetsViewController: UIViewController!
   private var mentionsViewController: UIViewController!
+
   
   var viewControllers: [UIViewController] = []
   let menuItemsTitles = ["Profile", "Home Timeline", "Mentions"]
@@ -49,6 +50,15 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell") as! MenuCell
     cell.menuItemTitle.text = menuItemsTitles[indexPath.row]
+    
+    if indexPath.row == 0 {
+      cell.menuItemImageView.image = #imageLiteral(resourceName: "userProfile3")
+    } else if indexPath.row == 1 {
+      cell.menuItemImageView.image = #imageLiteral(resourceName: "timeline")
+    } else if indexPath.row == 2 {
+      cell.menuItemImageView.image = #imageLiteral(resourceName: "at2")
+    }
+    
     return cell
   }
   

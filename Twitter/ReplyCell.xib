@@ -121,7 +121,7 @@
                 <outlet property="retweetImageView" destination="AHC-cF-Chy" id="Hna-w7-gVW"/>
                 <outlet property="tweetText" destination="Upk-oW-35v" id="T6h-1h-WBr"/>
             </connections>
-            <point key="canvasLocation" x="-177" y="174"/>
+            <point key="canvasLocation" x="-177.5" y="174"/>
         </tableViewCell>
     </objects>
     <resources>

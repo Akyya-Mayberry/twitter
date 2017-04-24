@@ -21,6 +21,7 @@ class Tweet: NSObject {
   var entities: NSDictionary?
   var favouriteCount: Int = 0
   var in_reply_to_user_id: Int?
+  var inReplyToScreenName: String?
   
   init(dictionary: NSDictionary){
     id = dictionary["id"] as? Int
@@ -34,6 +35,7 @@ class Tweet: NSObject {
        retweetOriginalUser = (dictionary["retweeted_status"] as? NSDictionary)?["user"] as? NSDictionary
     }
     in_reply_to_user_id = dictionary["in_reply_to_user_id"] as? Int
+    inReplyToScreenName = dictionary["in_reply_to_screen_name"] as? String
     
     
     // Not sure twitter includes favorites count anymore

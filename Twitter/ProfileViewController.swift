@@ -39,12 +39,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // From the tweet current user clicked, get the tweeter
     if tweet != nil {
-      self.user = User(dictionary: (tweet?.user)!)
+      if tweet?.retweetedStatus == nil {
+        user = User(dictionary: (tweet?.user)!)
+      } else {
+        let originalUser = tweet?.retweetedStatus?["user"] as? NSDictionary
+        user = User(dictionary: originalUser!)
+      }
     }
     
     // Set up user basic profile section
     nameLabel.text = user?.name!
-    handleLabel.text = user?.screenname!
+    handleLabel.text = "@\((user?.screenname!)!)"
     let following = (user?.following)! as Int
     let followers = (user?.followers)! as Int
     followingCountLabel.text = String(describing: following)
@@ -88,7 +93,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
       let detailsVC = segue.destination as! DetailsTableViewController
       let indexPath = tableView.indexPath(for: sender as! ProfileCell)
       
-      detailsVC.tweet = tweet
+      detailsVC.tweet = userTweets[(indexPath?.row)!]
       detailsVC.indexPath = indexPath
       detailsVC.tweets = userTweets
     }

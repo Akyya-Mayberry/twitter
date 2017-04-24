@@ -107,17 +107,22 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
   
   // View a users profile page
   func TweetCell(tweetCell: TweetCell, didTap value: Bool) {
-    print("#### did tap value is, \(value)")
     let indexPath = tableView.indexPath(for: tweetCell)
     let tweet = tweets?[(indexPath?.row)!]
     
-    // Segue to profile section with the correct tweet
+    // Segue to container
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
-    print("HERE IS TWEET !!!! \(tweet)")
-    profileVC.tweet = tweet
+    let containerVC = storyboard.instantiateViewController(withIdentifier: "containerViewController") as! ContainerViewController
+    let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController") as! MenuViewController
+    menuViewController.containerViewController = containerVC
+    containerVC.menuViewController = menuViewController
     
-    present(profileVC, animated: true, completion: nil)
+    // Set profile view as view to display with the tweet belonging to user
+    let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
+    profileVC.tweet = tweet!
+    containerVC.contentViewController = profileVC
+    
+    present(containerVC, animated: true, completion: nil)
   }
   
   // Reverses the state of a retweet.

@@ -19,8 +19,8 @@ class LoginViewController: UIViewController {
     
     logoImageView.layer.cornerRadius = 10
     logoImageView.clipsToBounds = true
-    logoImageView.layer.borderWidth = 3
-    logoImageView.layer.borderColor = UIColor.white.cgColor
+//    logoImageView.layer.borderWidth = 3
+//    logoImageView.layer.borderColor = UIColor.white.cgColor
   }
   
   override func didReceiveMemoryWarning() {

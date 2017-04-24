@@ -152,6 +152,32 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
   }
   
+  func getUserMentions(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+    // User mentions
+    
+    get("https://api.twitter.com/1.1/statuses/mentions_timeline.json", parameters: nil,
+        progress: { (nil) in
+          print("Progress...")
+    },
+        success: { (task: URLSessionDataTask, response: Any?) -> Void in
+          let tweetsAsDicts = response as! [NSDictionary]
+          //          for tweet in tweetsAsDicts {
+          //            if let retweet_status = tweet["retweeted_status"] {
+          //              print("$$$$$$$$$$$$$$$$ HERE IS THE TWEET THAT IS A RETWEET, \(tweet)")
+          //            }
+          //          }
+          
+          // Take the array of dicts and convert it to a array of Tweet objects.
+          // Because tweetsWithArray is class method, I can use the method without an istance.
+          let tweets = Tweet.tweetsWithArray(dictionaries: tweetsAsDicts)
+          print("here is one tweets, \(tweets[0])")
+          success(tweets)
+    },
+        failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+          failure(error)
+    })
+  }
+  
   func sendReplyTo(tweet id: Int, with reply: String,  success: @escaping (Any?) -> (), failure: @escaping (Error) -> ()) {
     post("https://api.twitter.com/1.1/statuses/update.json", parameters: ["status": reply, "in_reply_to_status_id": id], progress: { (nil) in
       print("Progress...")
