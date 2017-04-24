@@ -110,19 +110,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     let indexPath = tableView.indexPath(for: tweetCell)
     let tweet = tweets?[(indexPath?.row)!]
     
-    // Segue to container
+    // Display profile view of owner of the tweet
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let containerVC = storyboard.instantiateViewController(withIdentifier: "containerViewController") as! ContainerViewController
-    let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController") as! MenuViewController
-    menuViewController.containerViewController = containerVC
-    containerVC.menuViewController = menuViewController
-    
-    // Set profile view as view to display with the tweet belonging to user
     let profileVC = storyboard.instantiateViewController(withIdentifier: "profileViewController") as! ProfileViewController
     profileVC.tweet = tweet!
-    containerVC.contentViewController = profileVC
     
-    present(containerVC, animated: true, completion: nil)
+    show(profileVC, sender: self)
   }
   
   // Reverses the state of a retweet.

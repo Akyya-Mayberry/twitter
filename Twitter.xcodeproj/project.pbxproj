@@ -28,8 +28,8 @@
 		AB9F097E1EABAD9E009AC965 /* MentionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F097D1EABAD9E009AC965 /* MentionsViewController.swift */; };
 		AB9F09801EABB653009AC965 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F097F1EABB653009AC965 /* ContainerViewController.swift */; };
 		AB9F09861EAC4F75009AC965 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09851EAC4F75009AC965 /* ProfileCell.swift */; };
-		AB9F09891EAC6305009AC965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9F09871EAC6305009AC965 /* Main.storyboard */; };
 		AB9F09911EACFCF2009AC965 /* MentionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09901EACFCF2009AC965 /* MentionsCell.swift */; };
+		AB9F09941EAD8589009AC965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9F09921EAD8589009AC965 /* Main.storyboard */; };
 		ABF1CED81E9DC3D300A1B3E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1CED71E9DC3D300A1B3E1 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,8 +58,8 @@
 		AB9F097D1EABAD9E009AC965 /* MentionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsViewController.swift; sourceTree = "<group>"; };
 		AB9F097F1EABB653009AC965 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		AB9F09851EAC4F75009AC965 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		AB9F09881EAC6305009AC965 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB9F09901EACFCF2009AC965 /* MentionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsCell.swift; sourceTree = "<group>"; };
+		AB9F09931EAD8589009AC965 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABF1CED71E9DC3D300A1B3E1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B76DEE8279E3FF24533E53EF /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,7 +133,7 @@
 				ABF1CED61E9DC36D00A1B3E1 /* View Controllers */,
 				AB2DA6441E9DBBDB00D1079F /* AppDelegate.swift */,
 				AB2DA64B1E9DBBDB00D1079F /* Assets.xcassets */,
-				AB9F09871EAC6305009AC965 /* Main.storyboard */,
+				AB9F09921EAD8589009AC965 /* Main.storyboard */,
 				AB2DA64D1E9DBBDB00D1079F /* LaunchScreen.storyboard */,
 				AB2DA6501E9DBBDB00D1079F /* Info.plist */,
 			);
@@ -236,9 +236,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9F09941EAD8589009AC965 /* Main.storyboard in Resources */,
 				AB2DA64F1E9DBBDB00D1079F /* LaunchScreen.storyboard in Resources */,
 				AB2DA64C1E9DBBDB00D1079F /* Assets.xcassets in Resources */,
-				AB9F09891EAC6305009AC965 /* Main.storyboard in Resources */,
 				AB00B25B1EA3CEB5000F99CF /* ReplyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,10 +331,10 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		AB9F09871EAC6305009AC965 /* Main.storyboard */ = {
+		AB9F09921EAD8589009AC965 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AB9F09881EAC6305009AC965 /* Base */,
+				AB9F09931EAD8589009AC965 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

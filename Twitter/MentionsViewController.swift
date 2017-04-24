@@ -111,12 +111,12 @@ class MentionsViewController: UIViewController, UITableViewDataSource, UITableVi
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "detailsSegue" {
       let detailsVC = segue.destination as! DetailsTableViewController
-      let indexPath = tableView.indexPath(for: sender as! TweetCell)
+      let indexPath = tableView.indexPath(for: sender as! MentionsCell)
       
       detailsVC.tweet = tweets?[(indexPath?.row)!]
       detailsVC.indexPath = indexPath
       detailsVC.tweets = tweets
-      detailsVC.sender = sender as! TweetCell?
+      detailsVC.sender = sender as! MentionsCell?
     }
     
     if segue.identifier == "replySegue" {

@@ -199,7 +199,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="650FBAB0-EE1B-4D05-AFED-71AF6FBFC437" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-oQ-pT6">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="613C3406-07B5-4FA0-8E22-70AF16132163" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-oQ-pT6">
                                                     <rect key="frame" x="15" y="15" width="66" height="66"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="66" id="XDk-ZY-ak4"/>
@@ -908,6 +908,7 @@
                                             <outlet property="retweetsCountLabel" destination="qFI-Eq-nF4" id="4tL-wf-NZ3"/>
                                             <outlet property="tweetText" destination="x29-n7-P0B" id="YOt-Kb-u85"/>
                                             <outlet property="userImageView" destination="dA7-H7-hLJ" id="INj-9A-Wqs"/>
+                                            <segue destination="DRh-rh-c60" kind="show" identifier="detailsSegue" id="SNd-h0-QBV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1280,7 +1281,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="650FBAB0-EE1B-4D05-AFED-71AF6FBFC437" width="200" height="200">
+        <image name="613C3406-07B5-4FA0-8E22-70AF16132163" width="200" height="200">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4008,7 +4009,7 @@ AAJ7RAACe1YAAntZAAJ7XgAAAAAAAAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAntgA
         <image name="unfav" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ePq-Eg-nDf"/>
         <segue reference="wXL-ih-YDR"/>
+        <segue reference="36b-kt-wV8"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,7 +25,7 @@ class TweetDetailsViewController: UIViewController {
   var indexPath: IndexPath?
   var tweets: [Tweet]?
   var tweet: Tweet?
-  var sender: TweetCell?
+  var sender: UITableViewCell?
   
   override func viewDidLoad() {
     super.viewDidLoad()
