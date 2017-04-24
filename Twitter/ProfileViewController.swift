@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
   @IBOutlet weak var followingCountLabel: UILabel!
   @IBOutlet weak var userImageView: UIImageView!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var tweetsCountLabel: UILabel!
   
   var user: User?
   var userTweets: [Tweet] = []
@@ -52,8 +53,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     handleLabel.text = "@\((user?.screenname!)!)"
     let following = (user?.following)! as Int
     let followers = (user?.followers)! as Int
+    let tweetsCount = (user?.tweetsCount)! as Int
     followingCountLabel.text = String(describing: following)
     followersCountLabel.text = String(describing: followers)
+    tweetsCountLabel.text = String(describing: tweetsCount)
     
     if user?.profileUrl != nil {
       userImageView.setImageWith((user?.profileUrl)!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
