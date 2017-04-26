@@ -11,26 +11,61 @@ import AFNetworking
 import BDBOAuth1Manager
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+  @IBOutlet weak var pageControl: UIPageControl!
   
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var handleLabel: UILabel!
-  @IBOutlet weak var followersCountLabel: UILabel!
-  @IBOutlet weak var followingCountLabel: UILabel!
-  @IBOutlet weak var userImageView: UIImageView!
+  //  @IBOutlet weak var nameLabel: UILabel!
+  //  @IBOutlet weak var handleLabel: UILabel!
+  //  @IBOutlet weak var followersCountLabel: UILabel!
+  //  @IBOutlet weak var followingCountLabel: UILabel!
+  //  @IBOutlet weak var userImageView: UIImageView!
+  //  @IBOutlet weak var tweetsCountLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var tweetsCountLabel: UILabel!
+  @IBOutlet weak var PagingContentView: UIView! // Page through profile header views
   
   var user: User?
   var userTweets: [Tweet] = []
   var tweet: Tweet? // Only set if current user clicked on profile pic
   
+  // Set's the controller that will manage the content view
+  var contentViewController: UIViewController! {
+    didSet(oldContentViewController) {
+      // Remove any previous view controller
+      if oldContentViewController != nil {
+        oldContentViewController.willMove(toParentViewController: nil)
+        oldContentViewController.view.removeFromSuperview()
+        oldContentViewController.didMove(toParentViewController: nil)
+      }
+      
+      view.layoutIfNeeded()
+      
+      // Prep new view controller
+      contentViewController.willMove(toParentViewController: self)
+      contentViewController.view.frame = CGRect(x: 0, y: 0, width: PagingContentView.frame.size.width, height: PagingContentView.frame.size.height)
+      PagingContentView.addSubview(contentViewController.view)
+      contentViewController.didMove(toParentViewController: self)
+      // Close the menu
+      UIView.animate(withDuration: 0.3) {
+        //        self.contentViewLeftMargin.constant = 0
+        self.view.layoutIfNeeded()
+      }
+    }
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Set up table
     tableView.delegate = self
     tableView.dataSource = self
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 120
+    
+    // MARK: PROFILE HEADER SECTION
+    
+    // Set the paging view controller as controller for header container
+    let pagingVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfilePageViewController") as! ProfilePageViewController
+    contentViewController = pagingVC
     
     // Absence of a tweet means the user is selecting show profile from side menu,
     // therefore their profile should be displayed
@@ -46,22 +81,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let originalUser = tweet?.retweetedStatus?["user"] as? NSDictionary
         user = User(dictionary: originalUser!)
       }
-    }
-    
-    // Set up user basic profile section
-    nameLabel.text = user?.name!
-    handleLabel.text = "@\((user?.screenname!)!)"
-    let following = (user?.following)! as Int
-    let followers = (user?.followers)! as Int
-    let tweetsCount = (user?.tweetsCount)! as Int
-    followingCountLabel.text = String(describing: following)
-    followersCountLabel.text = String(describing: followers)
-    tweetsCountLabel.text = String(describing: tweetsCount)
-    
-    if user?.profileUrl != nil {
-      userImageView.setImageWith((user?.profileUrl)!, placeholderImage: #imageLiteral(resourceName: "twitterLogo"))
-    } else {
-      userImageView.image = #imageLiteral(resourceName: "twitterLogo")
     }
     
     // Get the users timeline

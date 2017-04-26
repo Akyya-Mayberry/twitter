@@ -30,6 +30,9 @@
 		AB9F09861EAC4F75009AC965 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09851EAC4F75009AC965 /* ProfileCell.swift */; };
 		AB9F09911EACFCF2009AC965 /* MentionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09901EACFCF2009AC965 /* MentionsCell.swift */; };
 		AB9F09941EAD8589009AC965 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9F09921EAD8589009AC965 /* Main.storyboard */; };
+		AB9F09961EADD3AE009AC965 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09951EADD3AE009AC965 /* ProfilePageViewController.swift */; };
+		AB9F09981EADDEDB009AC965 /* BasicProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09971EADDEDB009AC965 /* BasicProfileViewController.swift */; };
+		AB9F099A1EADDEED009AC965 /* ProfileDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F09991EADDEED009AC965 /* ProfileDescriptionViewController.swift */; };
 		ABF1CED81E9DC3D300A1B3E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF1CED71E9DC3D300A1B3E1 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,9 @@
 		AB9F09851EAC4F75009AC965 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		AB9F09901EACFCF2009AC965 /* MentionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsCell.swift; sourceTree = "<group>"; };
 		AB9F09931EAD8589009AC965 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AB9F09951EADD3AE009AC965 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
+		AB9F09971EADDEDB009AC965 /* BasicProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicProfileViewController.swift; sourceTree = "<group>"; };
+		AB9F09991EADDEED009AC965 /* ProfileDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionViewController.swift; sourceTree = "<group>"; };
 		ABF1CED71E9DC3D300A1B3E1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B76DEE8279E3FF24533E53EF /* Pods-Twitter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Twitter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Twitter/Pods-Twitter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +176,9 @@
 				AB9F097B1EAAB7F7009AC965 /* ProfileViewController.swift */,
 				AB9F097D1EABAD9E009AC965 /* MentionsViewController.swift */,
 				AB9F097F1EABB653009AC965 /* ContainerViewController.swift */,
+				AB9F09951EADD3AE009AC965 /* ProfilePageViewController.swift */,
+				AB9F09971EADDEDB009AC965 /* BasicProfileViewController.swift */,
+				AB9F09991EADDEED009AC965 /* ProfileDescriptionViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -309,13 +318,16 @@
 				AB5A849E1EA19E1800A02B00 /* TweetDetailsViewController.swift in Sources */,
 				AB2C26241E9FCB1A00283156 /* TweetsViewController.swift in Sources */,
 				AB9F097E1EABAD9E009AC965 /* MentionsViewController.swift in Sources */,
+				AB9F099A1EADDEED009AC965 /* ProfileDescriptionViewController.swift in Sources */,
 				AB2C262B1EA125B400283156 /* TweetViewController.swift in Sources */,
 				AB2DA6451E9DBBDB00D1079F /* AppDelegate.swift in Sources */,
 				AB6CBEC71E9ECDD4006B6FAF /* User.swift in Sources */,
 				AB6CBEC91E9ECDEA006B6FAF /* Tweet.swift in Sources */,
+				AB9F09961EADD3AE009AC965 /* ProfilePageViewController.swift in Sources */,
 				AB9F097A1EAA736E009AC965 /* MenuCell.swift in Sources */,
 				AB9F09861EAC4F75009AC965 /* ProfileCell.swift in Sources */,
 				AB9F09801EABB653009AC965 /* ContainerViewController.swift in Sources */,
+				AB9F09981EADDEDB009AC965 /* BasicProfileViewController.swift in Sources */,
 				AB00B25A1EA3CEB5000F99CF /* ReplyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
